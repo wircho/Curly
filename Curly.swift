@@ -37,9 +37,11 @@ public extension UIAlertView {
         cancel:((alertView:UIAlertView)->Void)?,
         shouldEnableFirstOtherButton:((alertView:UIAlertView)->Bool)?) {
 
-            self.delegate = Curly.AlertViewDelegate(click: click, willPresent: willPresent, didPresent: didPresent, willDismiss: willDismiss, didDismiss: didDismiss, cancel: cancel, shouldEnableFirstOtherButton: shouldEnableFirstOtherButton)
+            let delegate = Curly.AlertViewDelegate(click: click, willPresent: willPresent, didPresent: didPresent, willDismiss: willDismiss, didDismiss: didDismiss, cancel: cancel, shouldEnableFirstOtherButton: shouldEnableFirstOtherButton)
 
-            objc_setAssociatedObject(self, &CurlyAssociatedDelegateHandle, self.delegate, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+            self.delegate = delegate
+            
+            objc_setAssociatedObject(self, &CurlyAssociatedDelegateHandle, delegate, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
 
             self.show()
 
@@ -49,10 +51,13 @@ public extension UIAlertView {
 public extension UIViewController {
     
     
-    public func performSegueWithIdentifiers(identifier: String?, sender: AnyObject?, preparation:(UIStoryboardSegue,AnyObject?)->Void) {
+    public func performSegueWithIdentifier(identifier: String?, sender: AnyObject?, preparation:(UIStoryboardSegue,AnyObject?)->Void) {
         
         if let id = identifier {
             Curly.registerSeguePreparation(id, viewController: self, preparation: preparation)
+            
+            self.performSegueWithIdentifier(id, sender: sender)
+            
         }
         
         
