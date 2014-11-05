@@ -17,27 +17,27 @@ var CurlyAssociatedDelegateHandle: UInt8 = 0
 //MARK: Extensions
 
 public extension UIAlertView {
-    public func show(#click:(alertView:UIAlertView,buttonIndex:Int)->Void) {
-        self.show(click:click,willPresent:nil, didPresent: nil, willDismiss: nil, didDismiss: nil, cancel: nil, shouldEnableFirstOtherButton: nil)
+    public func show(#clicked:(alertView:UIAlertView,buttonIndex:Int)->Void) {
+        self.show(clicked:clicked,willPresent:nil, didPresent: nil, willDismiss: nil, didDismiss: nil, canceled: nil, shouldEnableFirstOtherButton: nil)
     }
 
     public func show(#willDismiss:(alertView:UIAlertView,buttonIndex:Int)->Void) {
-        self.show(click:nil,willPresent:nil, didPresent: nil, willDismiss:willDismiss, didDismiss: nil, cancel: nil, shouldEnableFirstOtherButton: nil)
+        self.show(clicked:nil,willPresent:nil, didPresent: nil, willDismiss:willDismiss, didDismiss: nil, canceled: nil, shouldEnableFirstOtherButton: nil)
     }
 
     public func show(#didDismiss:(alertView:UIAlertView,buttonIndex:Int)->Void) {
-        self.show(click:nil,willPresent:nil, didPresent: nil, willDismiss: nil, didDismiss: didDismiss, cancel: nil, shouldEnableFirstOtherButton: nil)
+        self.show(clicked:nil,willPresent:nil, didPresent: nil, willDismiss: nil, didDismiss: didDismiss, canceled: nil, shouldEnableFirstOtherButton: nil)
     }
 
-    public func show(#click:((alertView:UIAlertView,buttonIndex:Int)->Void)?,
+    public func show(#clicked:((alertView:UIAlertView,buttonIndex:Int)->Void)?,
         willPresent:((alertView:UIAlertView)->Void)?,
         didPresent:((alertView:UIAlertView)->Void)?,
         willDismiss:((alertView:UIAlertView,buttonIndex:Int)->Void)?,
         didDismiss:((alertView:UIAlertView,buttonIndex:Int)->Void)?,
-        cancel:((alertView:UIAlertView)->Void)?,
+        canceled:((alertView:UIAlertView)->Void)?,
         shouldEnableFirstOtherButton:((alertView:UIAlertView)->Bool)?) {
 
-            let delegate = Curly.AlertViewDelegate(click: click, willPresent: willPresent, didPresent: didPresent, willDismiss: willDismiss, didDismiss: didDismiss, cancel: cancel, shouldEnableFirstOtherButton: shouldEnableFirstOtherButton)
+            let delegate = Curly.AlertViewDelegate(clicked: clicked, willPresent: willPresent, didPresent: didPresent, willDismiss: willDismiss, didDismiss: didDismiss, canceled: canceled, shouldEnableFirstOtherButton: shouldEnableFirstOtherButton)
 
             self.delegate = delegate
             
@@ -76,8 +76,8 @@ public extension UIViewController {
 }
 
 public extension UIGestureRecognizer {
-    convenience init(recognized:(UIGestureRecognizer)->Void) {
-        let delegate = Curly.GestureRecognizerDelegate(recognized:recognized)
+    convenience init<T:UIGestureRecognizer>(recognized:(T)->Void) {
+        let delegate = CurlyGestureRecognizerDelegate(recognized:recognized)
         
         self.init(target: delegate, action: "recognizedGestureRecognizer:")
         
@@ -88,22 +88,6 @@ public extension UIGestureRecognizer {
 //MARK: Curly class
 
 public class Curly : NSObject {
-    
-//MARK: UIGestureRecognizer
-    
-    public class GestureRecognizerDelegate: NSObject {
-        
-        var recognized:(UIGestureRecognizer)->Void
-        
-        public func recognizedGestureRecognizer(gr:UIGestureRecognizer) {
-            recognized(gr)
-        }
-        
-        init(recognized:(UIGestureRecognizer)->Void) {
-            self.recognized = recognized
-            super.init()
-        }
-    }
     
 //MARK: UIViewController, UIStoryboardSegue
 
@@ -147,42 +131,42 @@ public class Curly : NSObject {
     
     public class AlertViewDelegate: NSObject, UIAlertViewDelegate {
 
-        var click:((alertView:UIAlertView,buttonIndex:Int)->Void)?
+        var clicked:((alertView:UIAlertView,buttonIndex:Int)->Void)?
         var willPresent:((alertView:UIAlertView)->Void)?
         var didPresent:((alertView:UIAlertView)->Void)?
         var willDismiss:((alertView:UIAlertView,buttonIndex:Int)->Void)?
         var didDismiss:((alertView:UIAlertView,buttonIndex:Int)->Void)?
-        var cancel:((alertView:UIAlertView)->Void)?
+        var canceled:((alertView:UIAlertView)->Void)?
         var shouldEnableFirstOtherButton:((alertView:UIAlertView)->Bool)?
 
-        init(click v_click:((alertView:UIAlertView,buttonIndex:Int)->Void)?,
+        init(clicked v_clicked:((alertView:UIAlertView,buttonIndex:Int)->Void)?,
             willPresent v_willPresent:((alertView:UIAlertView)->Void)?,
             didPresent v_didPresent:((alertView:UIAlertView)->Void)?,
             willDismiss v_willDismiss:((alertView:UIAlertView,buttonIndex:Int)->Void)?,
             didDismiss v_didDismiss:((alertView:UIAlertView,buttonIndex:Int)->Void)?,
-            cancel v_cancel:((alertView:UIAlertView)->Void)?,
+            canceled v_canceled:((alertView:UIAlertView)->Void)?,
             shouldEnableFirstOtherButton v_shouldEnableFirstOtherButton:((alertView:UIAlertView)->Bool)?) {
-                click = v_click
+                clicked = v_clicked
                 willPresent = v_willPresent
                 didPresent = v_didPresent
                 willDismiss = v_willDismiss
                 didDismiss = v_didDismiss
-                cancel = v_cancel
+                canceled = v_canceled
                 shouldEnableFirstOtherButton = v_shouldEnableFirstOtherButton
                 super.init()
         }
 
         public func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
-            if click != nil {
-                click!(alertView: alertView,buttonIndex: buttonIndex)
+            if clicked != nil {
+                clicked!(alertView: alertView,buttonIndex: buttonIndex)
             }
         }
 
         public func alertViewCancel(alertView: UIAlertView) {
-            if cancel == nil {
+            if canceled == nil {
                 alertView.dismissWithClickedButtonIndex(alertView.cancelButtonIndex, animated: false)
             }else{
-                cancel!(alertView:alertView)
+                canceled!(alertView:alertView)
             }
         }
 
@@ -219,6 +203,24 @@ public class Curly : NSObject {
         }
     }
     
+}
+
+//MARK: Functionality outside the Curly class
+
+//I had to make this a top level class because
+//generic types are not allowed to be nested into
+//other types
+
+public class CurlyGestureRecognizerDelegate<T:UIGestureRecognizer>: NSObject {
     
+    var recognized:(T)->Void
     
+    public func recognizedGestureRecognizer(gr:T) {
+        recognized(gr)
+    }
+    
+    init(recognized:(T)->Void) {
+        self.recognized = recognized
+        super.init()
+    }
 }

@@ -22,25 +22,21 @@ class GestureViewController: UIViewController {
         self.view.addSubview(fingerView)
         
         self.view.addGestureRecognizer(
-            UIPanGestureRecognizer{
-                (gr:UIGestureRecognizer)->Void in
+            UIPanGestureRecognizer {
+                (panGR:UIPanGestureRecognizer)->Void in
                 
-                if let panGR = gr as? UIPanGestureRecognizer {
-                    
-                    switch panGR.state {
-                    case .Began:
-                        fingerView.hidden = false
-                        fallthrough
-                    case .Changed:
-                        fingerView.center = panGR.locationInView(panGR.view!)
-                    case .Ended:
-                        fallthrough
-                    case .Failed:
-                        fingerView.hidden = true
-                    default:
-                        break
-                    }
-                    
+                switch panGR.state {
+                case .Began:
+                    fingerView.hidden = false
+                    fallthrough
+                case .Changed:
+                    fingerView.center = panGR.locationInView(panGR.view!)
+                case .Ended:
+                    fallthrough
+                case .Failed:
+                    fingerView.hidden = true
+                default:
+                    break
                 }
                 
             }
