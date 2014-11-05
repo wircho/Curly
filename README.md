@@ -61,3 +61,4 @@ let gestureRecognizer = UIPanGestureRecognizer {
     
 }
 ```
+This works with any subclass of UIGestureRecognizer.
