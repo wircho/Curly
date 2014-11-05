@@ -26,7 +26,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="57d-hq-hiA">
-                                <rect key="frame" x="189.5" y="155" width="222" height="30"/>
+                                <rect key="frame" x="189" y="155" width="222" height="30"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="Alert views with closures (blocks)">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -45,6 +45,16 @@
                                     <segue destination="Ec6-zJ-x6Q" kind="show" id="lSA-cB-WRH"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OeH-PL-0mU">
+                                <rect key="frame" x="158" y="235" width="283" height="30"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="Gesture recognizers with closures (blocks)">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="3L1-WI-cqr" kind="show" id="guS-Vb-AhM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -54,12 +64,48 @@
                             <constraint firstItem="wr4-9w-AQb" firstAttribute="top" secondItem="57d-hq-hiA" secondAttribute="bottom" constant="10" id="NWx-5A-DXg"/>
                             <constraint firstAttribute="centerX" secondItem="xwy-63-IEV" secondAttribute="centerX" id="RLV-HL-CYm"/>
                             <constraint firstAttribute="centerX" secondItem="wr4-9w-AQb" secondAttribute="centerX" id="n4q-6c-bha"/>
+                            <constraint firstItem="OeH-PL-0mU" firstAttribute="top" secondItem="wr4-9w-AQb" secondAttribute="bottom" constant="10" id="rTa-FP-IvZ"/>
+                            <constraint firstAttribute="centerX" secondItem="OeH-PL-0mU" secondAttribute="centerX" id="x6O-Qr-6vx"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Curly" id="77r-5q-2Js"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+        </scene>
+        <!--Gesture Recognizers-->
+        <scene sceneID="xqg-aB-Ihp">
+            <objects>
+                <viewController id="3L1-WI-cqr" customClass="GestureViewController" customModule="CurlySample" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8d0-eZ-Qzj"/>
+                        <viewControllerLayoutGuide type="bottom" id="vge-La-rQ2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hff-CU-Ybl">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Slide your finger on the screen" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="44f-fo-oBV">
+                                <rect key="frame" x="200" y="94" width="200" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="umi-x4-pOm"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="44f-fo-oBV" firstAttribute="top" secondItem="8d0-eZ-Qzj" secondAttribute="bottom" constant="30" id="96f-KK-b1p"/>
+                            <constraint firstAttribute="centerX" secondItem="44f-fo-oBV" secondAttribute="centerX" id="OZA-Td-aba"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Gesture Recognizers" id="33Y-OF-NGM"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VFk-bz-M6N" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1028" y="252"/>
         </scene>
         <!--Segues-->
         <scene sceneID="xNC-aS-hgd">
@@ -107,7 +153,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="92a-Mr-M0M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1396" y="1096"/>
+            <point key="canvasLocation" x="1012" y="-456"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="gBJ-Lh-AMd">
@@ -125,7 +171,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JpA-dh-hjS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2216" y="1098"/>
+            <point key="canvasLocation" x="1816" y="-456"/>
         </scene>
         <!--Alert Views-->
         <scene sceneID="OTO-fg-KGX">
@@ -173,7 +219,8 @@
                                     <action selector="tappedShowButton:" destination="Nc0-eG-Kdf" eventType="touchUpInside" id="C5Q-Vm-R8F"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WX1-yr-Mhf">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WX1-yr-Mhf">
+                                <rect key="frame" x="160" y="304" width="280" height="20.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="280" id="y2Y-0d-omu"/>
                                 </constraints>
@@ -206,7 +253,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9XA-QP-FBY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1372" y="-432"/>
+            <point key="canvasLocation" x="956" y="-1184"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="KVp-hC-bTm">

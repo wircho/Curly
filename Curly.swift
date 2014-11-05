@@ -75,9 +75,35 @@ public extension UIViewController {
     }
 }
 
+public extension UIGestureRecognizer {
+    convenience init(recognized:(UIGestureRecognizer)->Void) {
+        let delegate = Curly.GestureRecognizerDelegate(recognized:recognized)
+        
+        self.init(target: delegate, action: "recognizedGestureRecognizer:")
+        
+        objc_setAssociatedObject(self, &CurlyAssociatedDelegateHandle, delegate, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+    }
+}
+
 //MARK: Curly class
 
 public class Curly : NSObject {
+    
+//MARK: UIGestureRecognizer
+    
+    public class GestureRecognizerDelegate: NSObject {
+        
+        var recognized:(UIGestureRecognizer)->Void
+        
+        public func recognizedGestureRecognizer(gr:UIGestureRecognizer) {
+            recognized(gr)
+        }
+        
+        init(recognized:(UIGestureRecognizer)->Void) {
+            self.recognized = recognized
+            super.init()
+        }
+    }
     
 //MARK: UIViewController, UIStoryboardSegue
 
@@ -196,4 +222,3 @@ public class Curly : NSObject {
     
     
 }
-
