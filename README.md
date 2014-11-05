@@ -1,7 +1,7 @@
 Curly
 =====
 
-Swift library adding closure (block) functionality to several UIKit classes (alert views, storyboard segues, gesture recognizers, etc)
+Swift library adding *closure* (*block* or *callback*) functionality to several UIKit classes (alert views, storyboard segues, gesture recognizers, etc)
 
 Installation
 ------------
