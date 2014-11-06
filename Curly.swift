@@ -196,7 +196,7 @@ public class Curly : NSObject {
         
         public func alertViewShouldEnableFirstOtherButton(alertView: UIAlertView) -> Bool {
             if shouldEnableFirstOtherButton == nil {
-                return false
+                return true
             }else{
                 return shouldEnableFirstOtherButton!(alertView: alertView)
             }
