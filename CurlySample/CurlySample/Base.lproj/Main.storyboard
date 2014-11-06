@@ -55,6 +55,16 @@
                                     <segue destination="3L1-WI-cqr" kind="show" id="guS-Vb-AhM"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ml3-rx-Fhh">
+                                <rect key="frame" x="160.5" y="275" width="279" height="30"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="Buttons and sliders with closures (blocks)">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="L6Y-j3-usx" kind="show" id="Pf0-gY-bUY"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -63,6 +73,8 @@
                             <constraint firstItem="xwy-63-IEV" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="30" id="Joi-D6-2mx"/>
                             <constraint firstItem="wr4-9w-AQb" firstAttribute="top" secondItem="57d-hq-hiA" secondAttribute="bottom" constant="10" id="NWx-5A-DXg"/>
                             <constraint firstAttribute="centerX" secondItem="xwy-63-IEV" secondAttribute="centerX" id="RLV-HL-CYm"/>
+                            <constraint firstItem="Ml3-rx-Fhh" firstAttribute="top" secondItem="OeH-PL-0mU" secondAttribute="bottom" constant="10" id="jsE-Ri-Hua"/>
+                            <constraint firstAttribute="centerX" secondItem="Ml3-rx-Fhh" secondAttribute="centerX" id="kvf-08-P0o"/>
                             <constraint firstAttribute="centerX" secondItem="wr4-9w-AQb" secondAttribute="centerX" id="n4q-6c-bha"/>
                             <constraint firstItem="OeH-PL-0mU" firstAttribute="top" secondItem="wr4-9w-AQb" secondAttribute="bottom" constant="10" id="rTa-FP-IvZ"/>
                             <constraint firstAttribute="centerX" secondItem="OeH-PL-0mU" secondAttribute="centerX" id="x6O-Qr-6vx"/>
@@ -105,7 +117,75 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VFk-bz-M6N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1028" y="252"/>
+            <point key="canvasLocation" x="1040" y="242"/>
+        </scene>
+        <!--Controls (buttons, sliders)-->
+        <scene sceneID="YKp-af-Qi7">
+            <objects>
+                <viewController id="L6Y-j3-usx" customClass="ControlViewController" customModule="CurlySample" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Lrr-IS-g2V"/>
+                        <viewControllerLayoutGuide type="bottom" id="kfM-7h-aFd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2qK-8N-anw">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap the button or move the slider below" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9yW-2M-efm">
+                                <rect key="frame" x="200" y="94" width="200" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="OPN-W0-Kot"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hS0-bb-abU">
+                                <rect key="frame" x="258" y="155" width="83" height="36"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="foS-qr-Z8g"/>
+                                    <constraint firstAttribute="width" constant="83" id="iOZ-MI-Z8U"/>
+                                </constraints>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="y8M-NQ-iLA">
+                                <rect key="frame" x="173" y="211" width="254" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="GKU-qM-6vI"/>
+                                </constraints>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hpm-7q-DhO">
+                                <rect key="frame" x="297.5" y="261" width="5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="9yW-2M-efm" firstAttribute="top" secondItem="Lrr-IS-g2V" secondAttribute="bottom" constant="30" id="4ZB-aa-cx3"/>
+                            <constraint firstAttribute="centerX" secondItem="hS0-bb-abU" secondAttribute="centerX" id="9oU-JW-pJ7"/>
+                            <constraint firstItem="y8M-NQ-iLA" firstAttribute="top" secondItem="hS0-bb-abU" secondAttribute="bottom" constant="20" id="a4B-UC-bex"/>
+                            <constraint firstAttribute="centerX" secondItem="Hpm-7q-DhO" secondAttribute="centerX" id="dHG-YC-sva"/>
+                            <constraint firstAttribute="centerX" secondItem="y8M-NQ-iLA" secondAttribute="centerX" id="jOa-rH-MXd"/>
+                            <constraint firstItem="hS0-bb-abU" firstAttribute="top" secondItem="9yW-2M-efm" secondAttribute="bottom" constant="20" id="tAd-kh-GeZ"/>
+                            <constraint firstItem="Hpm-7q-DhO" firstAttribute="top" secondItem="y8M-NQ-iLA" secondAttribute="bottom" constant="20" id="xAE-uS-C3G"/>
+                            <constraint firstAttribute="centerX" secondItem="9yW-2M-efm" secondAttribute="centerX" id="xxC-0a-zmc"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Controls (buttons, sliders)" id="jjT-8O-jCV"/>
+                    <connections>
+                        <outlet property="button" destination="hS0-bb-abU" id="Tze-S3-lkU"/>
+                        <outlet property="label" destination="Hpm-7q-DhO" id="yJg-WJ-daG"/>
+                        <outlet property="slider" destination="y8M-NQ-iLA" id="7hT-x9-18s"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nPl-uq-zcF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="979" y="926"/>
         </scene>
         <!--Segues-->
         <scene sceneID="xNC-aS-hgd">

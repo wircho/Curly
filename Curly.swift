@@ -13,6 +13,7 @@ import UIKit
 //MARK: Constants
 
 var CurlyAssociatedDelegateHandle: UInt8 = 0
+var CurlyAssociatedDelegateDictionaryHandle: UInt8 = 0
 
 //MARK: Extensions
 
@@ -77,11 +78,52 @@ public extension UIViewController {
 
 public extension UIGestureRecognizer {
     convenience init<T:UIGestureRecognizer>(recognized:(T)->Void) {
-        let delegate = CurlyGestureRecognizerDelegate(recognized:recognized)
+        let delegate = CurlyGestureRecognizerDelegate(recognized: recognized)
         
         self.init(target: delegate, action: "recognizedGestureRecognizer:")
         
+        
         objc_setAssociatedObject(self, &CurlyAssociatedDelegateHandle, delegate, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+    }
+}
+
+//MARK: UIControl
+
+public extension UIControl {
+    public func addAction<T:UIControl>(events:UIControlEvents,closure:(T)->Void) {
+
+        var delegateDictionary = objc_getAssociatedObject(self, &CurlyAssociatedDelegateDictionaryHandle) as [UInt:[CurlyControlDelegate]]!
+
+        if delegateDictionary == nil {
+            delegateDictionary = [:]
+        }
+
+        if delegateDictionary[events.rawValue] == nil {
+            delegateDictionary[events.rawValue] = []
+        }
+
+        let delegate = CurlyControlDelegate(received: closure)
+
+        self.addTarget(delegate, action:Selector("recognizedControlEvent:"), forControlEvents: events)
+
+        delegateDictionary[events.rawValue]!.append(delegate)
+
+        objc_setAssociatedObject(self, &CurlyAssociatedDelegateDictionaryHandle, delegateDictionary, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+
+    }
+
+    public func removeActions(events:UIControlEvents) {
+
+        var delegateDictionary = objc_getAssociatedObject(self, &CurlyAssociatedDelegateDictionaryHandle) as [UInt:AnyObject]!
+
+        if delegateDictionary == nil {
+            return
+        }
+
+        delegateDictionary[events.rawValue] = nil
+
+        objc_setAssociatedObject(self, &CurlyAssociatedDelegateDictionaryHandle, delegateDictionary, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+
     }
 }
 
@@ -211,16 +253,40 @@ public class Curly : NSObject {
 //generic types are not allowed to be nested into
 //other types
 
-public class CurlyGestureRecognizerDelegate<T:UIGestureRecognizer>: NSObject {
+public class CurlyGestureRecognizerDelegate: NSObject {
+
+    let recognized:(UIGestureRecognizer)->Void
     
-    var recognized:(T)->Void
-    
-    public func recognizedGestureRecognizer(gr:T) {
+    public func recognizedGestureRecognizer(gr:UIGestureRecognizer) {
         recognized(gr)
     }
     
-    init(recognized:(T)->Void) {
-        self.recognized = recognized
+    init<T:UIGestureRecognizer>(recognized:(T)->Void) {
+        self.recognized = { (gestureRecognizer:UIGestureRecognizer) -> Void in
+            if let gr = gestureRecognizer as? T {
+                recognized(gr)
+            }
+        }
+        
+        super.init()
+    }
+}
+
+public class CurlyControlDelegate: NSObject {
+
+    public let received:(UIControl)->Void
+    
+    public func recognizedControlEvent(ctl:UIControl) {
+        received(ctl)
+    }
+    
+    init<T:UIControl>(received:(T)->Void) {
+        self.received = { (control:UIControl) -> Void in
+            if let ctl = control as? T {
+                received(ctl)
+            }
+            
+        }
         super.init()
     }
 }
