@@ -87,3 +87,13 @@ let gestureRecognizer = UIPanGestureRecognizer {
 }
 ```
 This works with any subclass of UIGestureRecognizer.
+
+### Observing an object's deinit (dealloc): ###
+
+```
+object.deinited {
+    println("object has been deinited")
+}
+```
+
+This works with any subclass of NSObject. Unfortunately, as of now, you cannot refer to your object or its properties inside the closure.
