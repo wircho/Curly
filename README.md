@@ -96,4 +96,4 @@ object.deinited {
 }
 ```
 
-This works with any subclass of NSObject. Unfortunately, as of now, you cannot refer to your object or its properties inside the closure.
+This works with any subclass of NSObject. Unfortunately, as of now, you cannot refer to your object or its properties inside the closure. In fact, any weak reference to the object will be nil by the time you are in the closure.
