@@ -3,7 +3,7 @@ Curly
 
 iOS library adding *closure* (*block* or *callback*) functionality to several UIKit classes (alert views, buttons, sliders, storyboard segues, gesture recognizers, etc).
 
-This library is written in **Swift** but it also works in **Objective-C**. If you are using Objective-C, make sure you add `#import "[YourProjectName]-Swift.h"` at the beginning of your Objective-C file. You may need to compile once for the Swift methods to be recognized by Xcode's Objective-C editor.
+This library is written in **Swift** but it also works in **Objective-C**. Make sure to read the installation notes below.
 
 Contents
 --------
@@ -20,6 +20,8 @@ Contents
 ------------
 
 Just add Curly.swift to your project :)
+
+This library is written in **Swift** but it also works in **Objective-C**. If you are using Objective-C, make sure you add `#import "[YourProjectName]-Swift.h"` at the beginning of your Objective-C file. You may need to compile once for the Swift methods to be recognized by Xcode's Objective-C editor.
 
 2. Usage
 -----
