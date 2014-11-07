@@ -31,6 +31,29 @@ alert.show(didDismiss:{(alertView:UIAlertView, buttonIndex:Int) -> Void in
 
 Other methods are `alert.show(clicked:)`, `alert.show(willDismiss:)` and the more complete version `show(clicked:willPresent:didPresent:willDismiss:didDismiss:canceled:shouldEnableFirstOtherButton:)`
 
+### Buttons, sliders, etc (UIControl): ###
+
+```
+button.addAction(.TouchUpInside) {
+    (bttn:UIButton) -> Void in
+    
+    println("tapped button")
+            
+}
+```
+
+```
+slider.addAction(.ValueChanged) {
+    (sldr:UISlider) -> Void in
+    
+    println("moved slider")
+            
+}
+```
+
+
+This works with any subclass of UIControl.
+
 ### Storyboard Segues: ###
 
 ```
@@ -41,6 +64,8 @@ self.performSegueWithIdentifier("segue", sender: nil) {
             
 }
 ```
+
+This works as long as you don't override `prepareForSegue:` in your `UIViewController`'s subclass.
 
 ### Gesture Recognizers: ###
 
