@@ -119,13 +119,19 @@ public extension UIControl {
     }
 
     public func removeActions(events:UIControlEvents) {
-
-        var delegateDictionary = objc_getAssociatedObject(self, &CurlyAssociatedDelegateDictionaryHandle) as [UInt:AnyObject]!
+        
+        var delegateDictionary = objc_getAssociatedObject(self, &CurlyAssociatedDelegateDictionaryHandle) as [UInt:[Curly.ControlDelegate]]!
 
         if delegateDictionary == nil {
             return
         }
 
+        if let array = delegateDictionary[events.rawValue] {
+            for delegate in array {
+                self.removeTarget(delegate, action: "recognizedControlEvent:", forControlEvents: events)
+            }
+        }
+        
         delegateDictionary[events.rawValue] = nil
 
         objc_setAssociatedObject(self, &CurlyAssociatedDelegateDictionaryHandle, delegateDictionary, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
