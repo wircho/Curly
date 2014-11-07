@@ -32,7 +32,7 @@ You can preview the functionality below by running the sample project in the **C
 
 ##### Swift: #####
 
-```
+```swift
 alertView.show(didDismiss:{(alertView:UIAlertView, buttonIndex:Int) -> Void in
 
     println("dismissed with button at index \(buttonIndex)")
@@ -57,7 +57,7 @@ The other Objective-C methods are: `showWithclicked:`, `.showWithWillDismiss:` a
 
 ##### Swift: #####
 
-```
+```swift
 button.addAction(.TouchUpInside) {
     (bttn:UIButton) -> Void in
     
@@ -99,7 +99,7 @@ This works with any subclass of UIControl.
 
 ##### Swift: #####
 
-```
+```swift
 self.performSegueWithIdentifier("segue", sender: nil) {
     (segue:UIStoryboardSegue, sender:AnyObject?) -> Void in
             
@@ -124,7 +124,7 @@ This works as long as you don't override `prepareForSegue` in your `UIViewContro
 
 ##### Swift: #####
 
-```
+```swift
 let gestureRecognizer = UIPanGestureRecognizer {
     (gr:UIPanGestureRecognizer)->Void in
                 
@@ -149,7 +149,7 @@ UIPanGestureRecognizer *gestureRecognizer
 
 ##### Swift: #####
 
-```
+```swift
 object.deinited {
     println("object has been deinited")
 }
