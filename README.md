@@ -10,11 +10,11 @@ Contents
 
 1. [Installation](#1-installation)
 2. [Usage](#2-usage)
-  1. [Alert Views](#i-alert-views)
-  2. [Buttons, Sliders, etc (UIControl)](#ii-buttons-sliders-etc-uicontrol)
-  3. [Storyboard Segues](#iii-storyboard-segues)
-  4. [Gesture Recognizers](#iv-gesture-recognizers)
-  5. [Observing an Object's Deinit (Dealloc)](#v-observing-an-objects-deinit-dealloc)
+  * [Alert Views](#alert-views)
+  * [Buttons, Sliders, etc (UIControl)](#buttons-sliders-etc-uicontrol)
+  * [Storyboard Segues](#storyboard-segues)
+  * [Gesture Recognizers](#gesture-recognizers)
+  * [Observing an Object's Deinit (Dealloc)](#observing-an-objects-deinit-dealloc)
 
 1. Installation
 ------------
@@ -26,7 +26,7 @@ Just add Curly.swift to your project :)
 
 You can preview the functionality below by running the sample project in the **CurlySample** folder
 
-### i. Alert Views: ###
+### Alert Views: ###
 
 ##### Swift: #####
 ```
@@ -49,7 +49,7 @@ Other methods are: `.show(clicked:)`, `.show(willDismiss:)` and the more complet
 
 The other Objective-C methods are: `showWithclicked:`, `.showWithWillDismiss:` and the more complete version `showWithClicked:willPresent:didPresent:willDismiss:didDismiss:canceled:shouldEnableFirstOtherButton:`
 
-### ii. Buttons, Sliders, etc (UIControl): ###
+### Buttons, Sliders, etc (UIControl): ###
 
 ##### Swift: #####
 
@@ -91,7 +91,7 @@ This works with any subclass of UIControl.
 }];
 ```
 
-### iii. Storyboard Segues: ###
+### Storyboard Segues: ###
 
 ##### Swift: #####
 
@@ -116,7 +116,7 @@ self.performSegueWithIdentifier("segue", sender: nil) {
 
 This works as long as you don't override `prepareForSegue` in your `UIViewController`'s subclass.
 
-### iv. Gesture Recognizers: ###
+### Gesture Recognizers: ###
 
 ##### Swift: #####
 
@@ -141,7 +141,7 @@ UIPanGestureRecognizer *gestureRecognizer
 }];
 ```
 
-### v. Observing an Object's Deinit (Dealloc): ###
+### Observing an Object's Deinit (Dealloc): ###
 
 ##### Swift: #####
 
