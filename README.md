@@ -34,7 +34,7 @@ Other methods are: `.show(clicked:)`, `.show(willDismiss:)` and the more complet
 }];
 ```
 
-The other Objective-C methods are: `showWithclicked:`, `.showWithWillDismiss:` and the more complete version `.showWithClicked:willPresent:didPresent:willDismiss:didDismiss:canceled:shouldEnableFirstOtherButton:`
+The other Objective-C methods are: `showWithclicked:`, `.showWithWillDismiss:` and the more complete version `showWithClicked:willPresent:didPresent:willDismiss:didDismiss:canceled:shouldEnableFirstOtherButton:`
 
 ### Buttons, Sliders, etc (UIControl): ###
 
