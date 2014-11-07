@@ -25,7 +25,7 @@ class DeinitViewController: UIViewController {
         
         weak var weakSelf = self
         
-        button.deinited { () -> Void in
+        button.deinited {
             
             if let lb = weakSelf?.label {
                 lb.text = "Deinited button!"
