@@ -27,11 +27,15 @@ alertView.show(didDismiss:{(alertView:UIAlertView, buttonIndex:Int) -> Void in
 ##### Objective-C: #####
 ```
 [alertView showWithDidDismiss:^(UIAlertView *alertView, NSInteger buttonIndex) {
+
     NSLog(@"dismissed with button at index %d",(int)buttonIndex);
+    
 }];
 ```
 
-Other methods are `alert.show(clicked:)`, `alert.show(willDismiss:)` and the more complete version `show(clicked:willPresent:didPresent:willDismiss:didDismiss:canceled:shouldEnableFirstOtherButton:)`
+Other methods are `.show(clicked:)`, `.show(willDismiss:)` and the more complete version `.show(clicked:willPresent:didPresent:willDismiss:didDismiss:canceled:shouldEnableFirstOtherButton:)`
+
+Equivalently in Objective-C: `showWithclicked:`, `.showWithWillDismiss:` and the more complete version `.showWithClicked:willPresent:didPresent:willDismiss:didDismiss:canceled:shouldEnableFirstOtherButton:`
 
 ### Buttons, Sliders, etc (UIControl): ###
 
