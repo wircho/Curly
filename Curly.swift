@@ -79,7 +79,7 @@ public extension UIViewController {
 
 public extension UIGestureRecognizer {
     convenience init<T:UIGestureRecognizer>(recognized:(T)->Void) {
-        let delegate = CurlyGestureRecognizerDelegate(recognized: recognized)
+        let delegate = Curly.GestureRecognizerDelegate(recognized: recognized)
         
         self.init(target: delegate, action: "recognizedGestureRecognizer:")
         
@@ -98,7 +98,7 @@ public extension UIControl {
     
     public func addAction<T:UIControl>(events:UIControlEvents,closure:(T)->Void) {
 
-        var delegateDictionary = objc_getAssociatedObject(self, &CurlyAssociatedDelegateDictionaryHandle) as [UInt:[CurlyControlDelegate]]!
+        var delegateDictionary = objc_getAssociatedObject(self, &CurlyAssociatedDelegateDictionaryHandle) as [UInt:[Curly.ControlDelegate]]!
 
         if delegateDictionary == nil {
             delegateDictionary = [:]
@@ -108,7 +108,7 @@ public extension UIControl {
             delegateDictionary[events.rawValue] = []
         }
 
-        let delegate = CurlyControlDelegate(received: closure)
+        let delegate = Curly.ControlDelegate(received: closure)
 
         self.addTarget(delegate, action:Selector("recognizedControlEvent:"), forControlEvents: events)
 
@@ -136,20 +136,20 @@ public extension UIControl {
 public extension NSObject {
     
     public func deinited(closure:()->Void) {
-        var deinitArray = objc_getAssociatedObject(self, &CurlyAssociatedDeinitDelegateArrayHandle) as [CurlyDeinitDelegate]!
+        var deinitArray = objc_getAssociatedObject(self, &CurlyAssociatedDeinitDelegateArrayHandle) as [Curly.DeinitDelegate]!
         
         if deinitArray == nil {
             deinitArray = []
         }
         
-        deinitArray.append(CurlyDeinitDelegate(deinited: closure))
+        deinitArray.append(Curly.DeinitDelegate(deinited: closure))
         
         objc_setAssociatedObject(self, &CurlyAssociatedDeinitDelegateArrayHandle, deinitArray, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
         
     }
     
     public func removeDeinitObservers() {
-        var deinitArray = objc_getAssociatedObject(self, &CurlyAssociatedDeinitDelegateArrayHandle) as [CurlyDeinitDelegate]!
+        var deinitArray = objc_getAssociatedObject(self, &CurlyAssociatedDeinitDelegateArrayHandle) as [Curly.DeinitDelegate]!
         
         if deinitArray == nil {
             return
@@ -166,9 +166,9 @@ public extension NSObject {
 
 //MARK: Curly class
 
-class Curly : NSObject {
+public class Curly : NSObject {
     
-//MARK: UIViewController, UIStoryboardSegue
+    //MARK: UIViewController, UIStoryboardSegue
 
     private struct SeguePreparation {
         let identifier:String
@@ -206,7 +206,7 @@ class Curly : NSObject {
         
     }
 
-//MARK: UIAlertView, UIAlertViewDelegate
+    //MARK: UIAlertView, UIAlertViewDelegate
     
     private class AlertViewDelegate: NSObject, UIAlertViewDelegate {
 
@@ -282,66 +282,68 @@ class Curly : NSObject {
         }
     }
     
-}
-
-//MARK: Gesture recognizer delegate
-
-public class CurlyGestureRecognizerDelegate: NSObject {
+    //MARK: Gesture recognizer delegate
     
-    let recognized:(UIGestureRecognizer)->Void
-    
-    public func recognizedGestureRecognizer(gr:UIGestureRecognizer) {
-        recognized(gr)
+    public class GestureRecognizerDelegate: NSObject {
+        
+        let recognized:(UIGestureRecognizer)->Void
+        
+        public func recognizedGestureRecognizer(gr:UIGestureRecognizer) {
+            recognized(gr)
+        }
+        
+        init<T:UIGestureRecognizer>(recognized:(T)->Void) {
+            self.recognized = { (gestureRecognizer:UIGestureRecognizer) -> Void in
+                if let gr = gestureRecognizer as? T {
+                    recognized(gr)
+                }
+            }
+            
+            super.init()
+        }
     }
     
-    init<T:UIGestureRecognizer>(recognized:(T)->Void) {
-        self.recognized = { (gestureRecognizer:UIGestureRecognizer) -> Void in
-            if let gr = gestureRecognizer as? T {
-                recognized(gr)
+    //MARK: UIControl delegate
+    
+    public class ControlDelegate: NSObject {
+        
+        public let received:(UIControl)->Void
+        
+        public func recognizedControlEvent(ctl:UIControl) {
+            received(ctl)
+        }
+        
+        init<T:UIControl>(received:(T)->Void) {
+            self.received = { (control:UIControl) -> Void in
+                if let ctl = control as? T {
+                    received(ctl)
+                }
+                
+            }
+            super.init()
+        }
+    }
+    
+    //MARK Deinit delegate
+    
+    public class DeinitDelegate: NSObject {
+        
+        public var deinited:(()->Void)!
+        
+        deinit {
+            if deinited != nil {
+                deinited()
             }
         }
         
-        super.init()
-    }
-}
-
-//MARK: UIControl delegate
-
-public class CurlyControlDelegate: NSObject {
-    
-    public let received:(UIControl)->Void
-    
-    public func recognizedControlEvent(ctl:UIControl) {
-        received(ctl)
-    }
-    
-    init<T:UIControl>(received:(T)->Void) {
-        self.received = { (control:UIControl) -> Void in
-            if let ctl = control as? T {
-                received(ctl)
-            }
-            
+        init(deinited:()->Void) {
+            self.deinited = deinited
+            super.init()
         }
-        super.init()
-    }
-}
-
-//MARK Deinit delegate
-
-public class CurlyDeinitDelegate: NSObject {
-    
-    public var deinited:(()->Void)!
-    
-    deinit {
-        if deinited != nil {
-            deinited()
-        }
-    }
-    
-    init(deinited:()->Void) {
-        self.deinited = deinited
-        super.init()
+        
     }
     
 }
+
+
 
