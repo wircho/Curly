@@ -9,7 +9,7 @@ Contents
 --------
 
 1. [Installation](#1-installation)
-2. [Usage](#2-installation)
+2. [Usage](#2-usage)
   1. [Alert Views](#i-alert-views)
   2. [Buttons, Sliders, etc (UIControl)](#ii-buttons-sliders-etc-uicontrol)
   3. [Storyboard Segues](#iii-storyboard-segues)
