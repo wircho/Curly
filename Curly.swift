@@ -14,6 +14,7 @@ import UIKit
 
 var CurlyAssociatedDelegateHandle: UInt8 = 0
 var CurlyAssociatedDelegateDictionaryHandle: UInt8 = 0
+var CurlyAssociatedDeinitDelegateArrayHandle: UInt8 = 0
 
 //MARK: Extensions
 
@@ -78,7 +79,7 @@ public extension UIViewController {
 
 public extension UIGestureRecognizer {
     convenience init<T:UIGestureRecognizer>(recognized:(T)->Void) {
-        let delegate = CurlyGestureRecognizerDelegate(recognized: recognized)
+        let delegate = Curly.GestureRecognizerDelegate(recognized: recognized)
         
         self.init(target: delegate, action: "recognizedGestureRecognizer:")
         
@@ -87,12 +88,10 @@ public extension UIGestureRecognizer {
     }
 }
 
-//MARK: UIControl
-
 public extension UIControl {
     public func addAction<T:UIControl>(events:UIControlEvents,closure:(T)->Void) {
 
-        var delegateDictionary = objc_getAssociatedObject(self, &CurlyAssociatedDelegateDictionaryHandle) as [UInt:[CurlyControlDelegate]]!
+        var delegateDictionary = objc_getAssociatedObject(self, &CurlyAssociatedDelegateDictionaryHandle) as [UInt:[Curly.ControlDelegate]]!
 
         if delegateDictionary == nil {
             delegateDictionary = [:]
@@ -102,7 +101,7 @@ public extension UIControl {
             delegateDictionary[events.rawValue] = []
         }
 
-        let delegate = CurlyControlDelegate(received: closure)
+        let delegate = Curly.ControlDelegate(received: closure)
 
         self.addTarget(delegate, action:Selector("recognizedControlEvent:"), forControlEvents: events)
 
@@ -127,9 +126,40 @@ public extension UIControl {
     }
 }
 
+public extension NSObject {
+    
+    public func deinited(closure:()->Void) {
+        var deinitArray = objc_getAssociatedObject(self, &CurlyAssociatedDeinitDelegateArrayHandle) as [Curly.DeinitDelegate]!
+        
+        if deinitArray == nil {
+            deinitArray = []
+        }
+        
+        deinitArray.append(Curly.DeinitDelegate(deinited: closure))
+        
+        objc_setAssociatedObject(self, &CurlyAssociatedDeinitDelegateArrayHandle, deinitArray, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+        
+    }
+    
+    public func removeDeinitObservers() {
+        var deinitArray = objc_getAssociatedObject(self, &CurlyAssociatedDeinitDelegateArrayHandle) as [Curly.DeinitDelegate]!
+        
+        if deinitArray == nil {
+            return
+        }
+        
+        for delegate in deinitArray {
+            delegate.deinited = nil
+        }
+        
+        objc_setAssociatedObject(self, &CurlyAssociatedDeinitDelegateArrayHandle, nil, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+    }
+    
+}
+
 //MARK: Curly class
 
-public class Curly : NSObject {
+class Curly : NSObject {
     
 //MARK: UIViewController, UIStoryboardSegue
 
@@ -171,7 +201,7 @@ public class Curly : NSObject {
 
 //MARK: UIAlertView, UIAlertViewDelegate
     
-    public class AlertViewDelegate: NSObject, UIAlertViewDelegate {
+    private class AlertViewDelegate: NSObject, UIAlertViewDelegate {
 
         var clicked:((alertView:UIAlertView,buttonIndex:Int)->Void)?
         var willPresent:((alertView:UIAlertView)->Void)?
@@ -198,13 +228,13 @@ public class Curly : NSObject {
                 super.init()
         }
 
-        public func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+        private func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
             if clicked != nil {
                 clicked!(alertView: alertView,buttonIndex: buttonIndex)
             }
         }
 
-        public func alertViewCancel(alertView: UIAlertView) {
+        private func alertViewCancel(alertView: UIAlertView) {
             if canceled == nil {
                 alertView.dismissWithClickedButtonIndex(alertView.cancelButtonIndex, animated: false)
             }else{
@@ -212,31 +242,31 @@ public class Curly : NSObject {
             }
         }
 
-        public func willPresentAlertView(alertView: UIAlertView) {
+        private func willPresentAlertView(alertView: UIAlertView) {
             if willPresent != nil {
                 willPresent!(alertView: alertView)
             }
         }
 
-        public func didPresentAlertView(alertView: UIAlertView) {
+        private func didPresentAlertView(alertView: UIAlertView) {
             if didPresent != nil {
                 didPresent!(alertView: alertView)
             }
         }
 
-        public func alertView(alertView: UIAlertView, willDismissWithButtonIndex buttonIndex: Int) {
+        private func alertView(alertView: UIAlertView, willDismissWithButtonIndex buttonIndex: Int) {
             if willDismiss != nil {
                 willDismiss!(alertView: alertView, buttonIndex: buttonIndex)
             }
         }
 
-        public func alertView(alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int) {
+        private func alertView(alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int) {
             if didDismiss != nil {
                 didDismiss!(alertView: alertView, buttonIndex: buttonIndex)
             }
         }
         
-        public func alertViewShouldEnableFirstOtherButton(alertView: UIAlertView) -> Bool {
+        private func alertViewShouldEnableFirstOtherButton(alertView: UIAlertView) -> Bool {
             if shouldEnableFirstOtherButton == nil {
                 return true
             }else{
@@ -245,48 +275,66 @@ public class Curly : NSObject {
         }
     }
     
-}
-
-//MARK: Functionality outside the Curly class
-
-//I had to make this a top level class because
-//generic types are not allowed to be nested into
-//other types
-
-public class CurlyGestureRecognizerDelegate: NSObject {
-
-    let recognized:(UIGestureRecognizer)->Void
+    //MARK: Gesture recognizer delegate
     
-    public func recognizedGestureRecognizer(gr:UIGestureRecognizer) {
-        recognized(gr)
+    private class GestureRecognizerDelegate: NSObject {
+        
+        let recognized:(UIGestureRecognizer)->Void
+        
+        private func recognizedGestureRecognizer(gr:UIGestureRecognizer) {
+            recognized(gr)
+        }
+        
+        init<T:UIGestureRecognizer>(recognized:(T)->Void) {
+            self.recognized = { (gestureRecognizer:UIGestureRecognizer) -> Void in
+                if let gr = gestureRecognizer as? T {
+                    recognized(gr)
+                }
+            }
+            
+            super.init()
+        }
     }
     
-    init<T:UIGestureRecognizer>(recognized:(T)->Void) {
-        self.recognized = { (gestureRecognizer:UIGestureRecognizer) -> Void in
-            if let gr = gestureRecognizer as? T {
-                recognized(gr)
+    //MARK: UIControl delegate
+    
+    private class ControlDelegate: NSObject {
+        
+        private let received:(UIControl)->Void
+        
+        private func recognizedControlEvent(ctl:UIControl) {
+            received(ctl)
+        }
+        
+        init<T:UIControl>(received:(T)->Void) {
+            self.received = { (control:UIControl) -> Void in
+                if let ctl = control as? T {
+                    received(ctl)
+                }
+                
+            }
+            super.init()
+        }
+    }
+    
+    //MARK Deinit delegate
+    
+    private class DeinitDelegate: NSObject {
+        
+        private var deinited:(()->Void)!
+        
+        deinit {
+            if deinited != nil {
+                deinited()
             }
         }
         
-        super.init()
-    }
-}
-
-public class CurlyControlDelegate: NSObject {
-
-    public let received:(UIControl)->Void
-    
-    public func recognizedControlEvent(ctl:UIControl) {
-        received(ctl)
-    }
-    
-    init<T:UIControl>(received:(T)->Void) {
-        self.received = { (control:UIControl) -> Void in
-            if let ctl = control as? T {
-                received(ctl)
-            }
-            
+        init(deinited:()->Void) {
+            self.deinited = deinited
+            super.init()
         }
-        super.init()
+        
     }
+    
 }
+

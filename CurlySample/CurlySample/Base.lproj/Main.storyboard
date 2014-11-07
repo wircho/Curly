@@ -56,13 +56,23 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ml3-rx-Fhh">
-                                <rect key="frame" x="160.5" y="275" width="279" height="30"/>
+                                <rect key="frame" x="160" y="275" width="279" height="30"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="Buttons and sliders with closures (blocks)">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <segue destination="L6Y-j3-usx" kind="show" id="Pf0-gY-bUY"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UBE-o7-HUj">
+                                <rect key="frame" x="152" y="315" width="295" height="30"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="Deinit (dealloc) observer with closure (block)">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="uy2-u0-LO4" kind="show" id="5HG-ze-qcg"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -73,10 +83,12 @@
                             <constraint firstItem="xwy-63-IEV" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="30" id="Joi-D6-2mx"/>
                             <constraint firstItem="wr4-9w-AQb" firstAttribute="top" secondItem="57d-hq-hiA" secondAttribute="bottom" constant="10" id="NWx-5A-DXg"/>
                             <constraint firstAttribute="centerX" secondItem="xwy-63-IEV" secondAttribute="centerX" id="RLV-HL-CYm"/>
+                            <constraint firstAttribute="centerX" secondItem="UBE-o7-HUj" secondAttribute="centerX" id="ck4-vj-8ek"/>
                             <constraint firstItem="Ml3-rx-Fhh" firstAttribute="top" secondItem="OeH-PL-0mU" secondAttribute="bottom" constant="10" id="jsE-Ri-Hua"/>
                             <constraint firstAttribute="centerX" secondItem="Ml3-rx-Fhh" secondAttribute="centerX" id="kvf-08-P0o"/>
                             <constraint firstAttribute="centerX" secondItem="wr4-9w-AQb" secondAttribute="centerX" id="n4q-6c-bha"/>
                             <constraint firstItem="OeH-PL-0mU" firstAttribute="top" secondItem="wr4-9w-AQb" secondAttribute="bottom" constant="10" id="rTa-FP-IvZ"/>
+                            <constraint firstItem="UBE-o7-HUj" firstAttribute="top" secondItem="Ml3-rx-Fhh" secondAttribute="bottom" constant="10" id="teW-Eu-Jar"/>
                             <constraint firstAttribute="centerX" secondItem="OeH-PL-0mU" secondAttribute="centerX" id="x6O-Qr-6vx"/>
                         </constraints>
                     </view>
@@ -185,7 +197,61 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nPl-uq-zcF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="979" y="926"/>
+            <point key="canvasLocation" x="1003" y="1038"/>
+        </scene>
+        <!--Deinit (Dealloc) Observer-->
+        <scene sceneID="FNL-23-G7A">
+            <objects>
+                <viewController id="uy2-u0-LO4" customClass="DeinitViewController" customModule="CurlySample" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="c6O-Vx-vRA"/>
+                        <viewControllerLayoutGuide type="bottom" id="ciJ-85-wAn"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="RIj-3J-O9f">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0VL-Uv-fP4">
+                                <rect key="frame" x="259" y="155" width="83" height="36"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="83" id="0yc-X9-oNV"/>
+                                    <constraint firstAttribute="height" constant="36" id="bgf-Tz-Uyv"/>
+                                </constraints>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="tappedButton:" destination="uy2-u0-LO4" eventType="touchUpInside" id="8mz-wp-iUm"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap the button to make it disapper and deinit!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lUO-gQ-Cju">
+                                <rect key="frame" x="200" y="94" width="200" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="aBX-TF-CgS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="0VL-Uv-fP4" secondAttribute="centerX" id="EfK-xR-rVb"/>
+                            <constraint firstItem="lUO-gQ-Cju" firstAttribute="top" secondItem="c6O-Vx-vRA" secondAttribute="bottom" constant="30" id="M0I-ez-Kov"/>
+                            <constraint firstItem="0VL-Uv-fP4" firstAttribute="top" secondItem="lUO-gQ-Cju" secondAttribute="bottom" constant="20" id="YvT-sf-GVY"/>
+                            <constraint firstAttribute="centerX" secondItem="lUO-gQ-Cju" secondAttribute="centerX" id="qSk-wK-uHh"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Deinit (Dealloc) Observer" id="iGM-yc-ad5"/>
+                    <connections>
+                        <outlet property="button" destination="0VL-Uv-fP4" id="o7c-KU-m7b"/>
+                        <outlet property="label" destination="lUO-gQ-Cju" id="X1h-gW-hpy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IkW-Sl-FJE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1024" y="1826"/>
         </scene>
         <!--Segues-->
         <scene sceneID="xNC-aS-hgd">
