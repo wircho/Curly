@@ -13,7 +13,7 @@ Usage
 
 You can preview the functionality below by running the sample project in the **CurlySample** folder
 
-### Alert views: ###
+### Alert Views: ###
 
 ```
 alert.show(didDismiss:{(alertView:UIAlertView, buttonIndex:Int) -> Void in
@@ -31,7 +31,7 @@ alert.show(didDismiss:{(alertView:UIAlertView, buttonIndex:Int) -> Void in
 
 Other methods are `alert.show(clicked:)`, `alert.show(willDismiss:)` and the more complete version `show(clicked:willPresent:didPresent:willDismiss:didDismiss:canceled:shouldEnableFirstOtherButton:)`
 
-### Buttons, sliders, etc (UIControl): ###
+### Buttons, Sliders, etc (UIControl): ###
 
 ```
 button.addAction(.TouchUpInside) {
@@ -88,7 +88,7 @@ let gestureRecognizer = UIPanGestureRecognizer {
 ```
 This works with any subclass of UIGestureRecognizer.
 
-### Observing an object's deinit (dealloc): ###
+### Observing an Object's Deinit (Dealloc): ###
 
 ```
 object.deinited {
