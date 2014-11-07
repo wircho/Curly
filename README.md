@@ -43,7 +43,7 @@ Other methods are: `.show(clicked:)`, `.show(willDismiss:)` and the more complet
 
 ##### Objective-C: #####
 
-```
+```objective-c
 [alertView showWithDidDismiss:^(UIAlertView *alertView, NSInteger buttonIndex) {
 
     NSLog(@"dismissed with button at index %d",(int)buttonIndex);
@@ -66,7 +66,7 @@ button.addAction(.TouchUpInside) {
 }
 ```
 
-```
+```swift
 slider.addAction(.ValueChanged) {
     (sldr:UISlider) -> Void in
     
@@ -79,7 +79,7 @@ This works with any subclass of UIControl.
 
 ##### Objective-C: #####
 
-```
+```objective-c
 [button addAction:UIControlEventTouchUpInside block:^(UIControl *bttn) {
                 
     NSLog(@"tapped button");
@@ -87,7 +87,7 @@ This works with any subclass of UIControl.
 }];
 ```
 
-```
+```objective-c
 [slider addAction:UIControlEventValueChanged block:^(UIControl *sldr) {
                 
     NSLog(@"moved slider");
@@ -110,7 +110,7 @@ self.performSegueWithIdentifier("segue", sender: nil) {
 
 ##### Objective-C: #####
 
-```
+```objective-c
 [[UIViewController alloc] performSegueWithIdentifier:@"segue" sender:nil preparation:^(UIStoryboardSegue *segue, id sender) {
                 
     NSLog(@"preparing for segue!");
@@ -136,7 +136,7 @@ This works with any subclass of UIGestureRecognizer.
 
 ##### Objective-C: #####
 
-```
+```objective-c
 UIPanGestureRecognizer *gestureRecognizer
 = [[UIPanGestureRecognizer alloc] initWithBlock:^(UIGestureRecognizer *gr) {
                 
@@ -157,7 +157,7 @@ object.deinited {
 
 ##### Objective-C: #####
 
-```
+```objective-c
 [object deinited:^{
     NSLog(@"object has been deinited");   
 }];
