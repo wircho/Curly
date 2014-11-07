@@ -3,7 +3,7 @@ Curly
 
 iOS library adding *closure* (*block* or *callback*) functionality to several UIKit classes (alert views, buttons, sliders, storyboard segues, gesture recognizers, etc).
 
-This library is written in **Swift** but it also works in **Objective-C**.
+This library is written in **Swift** but it also works in **Objective-C**. If you are using Objective-C, make sure you add `#import "[YourProjectName]-Swift.h"` at the beginning of your Objective-C file. You may need to compile once for the Swift methods to be recognized by Xcode's Objective-C editor.
 
 Contents
 --------
@@ -29,6 +29,7 @@ You can preview the functionality below by running the sample project in the **C
 ### Alert Views: ###
 
 ##### Swift: #####
+
 ```
 alertView.show(didDismiss:{(alertView:UIAlertView, buttonIndex:Int) -> Void in
 
@@ -39,6 +40,7 @@ alertView.show(didDismiss:{(alertView:UIAlertView, buttonIndex:Int) -> Void in
 Other methods are: `.show(clicked:)`, `.show(willDismiss:)` and the more complete version `.show(clicked:willPresent:didPresent:willDismiss:didDismiss:canceled:shouldEnableFirstOtherButton:)`
 
 ##### Objective-C: #####
+
 ```
 [alertView showWithDidDismiss:^(UIAlertView *alertView, NSInteger buttonIndex) {
 
