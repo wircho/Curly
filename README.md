@@ -15,18 +15,20 @@ You can preview the functionality below by running the sample project in the **C
 
 ### Alert Views: ###
 
+##### Swift: #####
 ```
-alert.show(didDismiss:{(alertView:UIAlertView, buttonIndex:Int) -> Void in
+alertView.show(didDismiss:{(alertView:UIAlertView, buttonIndex:Int) -> Void in
 
-    let buttonTitle = alertView.buttonTitleAtIndex(buttonIndex)
-            
-    if buttonIndex == alertView.cancelButtonIndex {
-        println("dismissed with cancel button: \(buttonTitle)")
-    }else{
-        println("dismissed with button: \(buttonTitle)")
-    }
+    println("dismissed with button at index \(buttonIndex)")
             
 })
+```
+
+##### Objective-C: #####
+```
+[alertView showWithDidDismiss:^(UIAlertView *alertView, NSInteger buttonIndex) {
+    NSLog(@"dismissed with button at index %d",(int)buttonIndex);
+}];
 ```
 
 Other methods are `alert.show(clicked:)`, `alert.show(willDismiss:)` and the more complete version `show(clicked:willPresent:didPresent:willDismiss:didDismiss:canceled:shouldEnableFirstOtherButton:)`
