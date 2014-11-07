@@ -23,6 +23,7 @@ alertView.show(didDismiss:{(alertView:UIAlertView, buttonIndex:Int) -> Void in
             
 })
 ```
+Other methods are: `.show(clicked:)`, `.show(willDismiss:)` and the more complete version `.show(clicked:willPresent:didPresent:willDismiss:didDismiss:canceled:shouldEnableFirstOtherButton:)`
 
 ##### Objective-C: #####
 ```
@@ -33,9 +34,7 @@ alertView.show(didDismiss:{(alertView:UIAlertView, buttonIndex:Int) -> Void in
 }];
 ```
 
-Other methods are `.show(clicked:)`, `.show(willDismiss:)` and the more complete version `.show(clicked:willPresent:didPresent:willDismiss:didDismiss:canceled:shouldEnableFirstOtherButton:)`
-
-Equivalently in Objective-C: `showWithclicked:`, `.showWithWillDismiss:` and the more complete version `.showWithClicked:willPresent:didPresent:willDismiss:didDismiss:canceled:shouldEnableFirstOtherButton:`
+The other Objective-C methods are: `showWithclicked:`, `.showWithWillDismiss:` and the more complete version `.showWithClicked:willPresent:didPresent:willDismiss:didDismiss:canceled:shouldEnableFirstOtherButton:`
 
 ### Buttons, Sliders, etc (UIControl): ###
 
