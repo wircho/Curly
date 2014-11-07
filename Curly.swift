@@ -78,8 +78,14 @@ public extension UIViewController {
 }
 
 public extension UIGestureRecognizer {
-    convenience init<T:UIGestureRecognizer>(recognized:(T)->Void) {
-        let delegate = Curly.GestureRecognizerDelegate(recognized: recognized)
+    
+    //Objective C support
+    convenience init (block:(UIGestureRecognizer)->Void) {
+        self.init(closure:block)
+    }
+    
+    convenience init<T:UIGestureRecognizer>(closure:(T)->Void) {
+        let delegate = Curly.GestureRecognizerDelegate(recognized: closure)
         
         self.init(target: delegate, action: "recognizedGestureRecognizer:")
         
@@ -90,10 +96,10 @@ public extension UIGestureRecognizer {
 
 public extension UIControl {
     
-    //This method is only here because Objective-C is not able to access dynamic methods from Swift
-    public func objc_addAction(events:UIControlEvents,closure:(UIControl)->Void)
+    //Objective C support
+    public func addAction(events:UIControlEvents,block:(UIControl)->Void)
     {
-        self.addAction(events, closure: closure)
+        self.addAction(events, closure: block)
     }
     
     public func addAction<T:UIControl>(events:UIControlEvents,closure:(T)->Void) {
