@@ -3,7 +3,7 @@ Curly
 
 iOS library adding *closure* (*block* or *callback*) functionality to several UIKit classes (alert views, buttons, sliders, storyboard segues, gesture recognizers, etc).
 
-This library is written in **Swift** but it works also in **Objective-C**.
+This library is written in **Swift** but it also works in **Objective-C**. Make sure to read the installation notes below.
 
 Contents
 --------
@@ -21,6 +21,8 @@ Contents
 
 Just add Curly.swift to your project :)
 
+This library is written in **Swift** but it also works in **Objective-C**. If you are using Objective-C, make sure you add `#import "[YourProjectName]-Swift.h"` at the beginning of your Objective-C file. You may need to compile once for the Swift methods to be recognized by Xcode's Objective-C editor.
+
 2. Usage
 -----
 
@@ -29,7 +31,8 @@ You can preview the functionality below by running the sample project in the **C
 ### Alert Views: ###
 
 ##### Swift: #####
-```
+
+```swift
 alertView.show(didDismiss:{(alertView:UIAlertView, buttonIndex:Int) -> Void in
 
     println("dismissed with button at index \(buttonIndex)")
@@ -39,7 +42,8 @@ alertView.show(didDismiss:{(alertView:UIAlertView, buttonIndex:Int) -> Void in
 Other methods are: `.show(clicked:)`, `.show(willDismiss:)` and the more complete version `.show(clicked:willPresent:didPresent:willDismiss:didDismiss:canceled:shouldEnableFirstOtherButton:)`
 
 ##### Objective-C: #####
-```
+
+```objective-c
 [alertView showWithDidDismiss:^(UIAlertView *alertView, NSInteger buttonIndex) {
 
     NSLog(@"dismissed with button at index %d",(int)buttonIndex);
@@ -53,7 +57,7 @@ The other Objective-C methods are: `showWithclicked:`, `.showWithWillDismiss:` a
 
 ##### Swift: #####
 
-```
+```swift
 button.addAction(.TouchUpInside) {
     (bttn:UIButton) -> Void in
     
@@ -62,7 +66,7 @@ button.addAction(.TouchUpInside) {
 }
 ```
 
-```
+```swift
 slider.addAction(.ValueChanged) {
     (sldr:UISlider) -> Void in
     
@@ -75,7 +79,7 @@ This works with any subclass of UIControl.
 
 ##### Objective-C: #####
 
-```
+```objective-c
 [button addAction:UIControlEventTouchUpInside block:^(UIControl *bttn) {
                 
     NSLog(@"tapped button");
@@ -83,7 +87,7 @@ This works with any subclass of UIControl.
 }];
 ```
 
-```
+```objective-c
 [slider addAction:UIControlEventValueChanged block:^(UIControl *sldr) {
                 
     NSLog(@"moved slider");
@@ -95,7 +99,7 @@ This works with any subclass of UIControl.
 
 ##### Swift: #####
 
-```
+```swift
 self.performSegueWithIdentifier("segue", sender: nil) {
     (segue:UIStoryboardSegue, sender:AnyObject?) -> Void in
             
@@ -106,7 +110,7 @@ self.performSegueWithIdentifier("segue", sender: nil) {
 
 ##### Objective-C: #####
 
-```
+```objective-c
 [[UIViewController alloc] performSegueWithIdentifier:@"segue" sender:nil preparation:^(UIStoryboardSegue *segue, id sender) {
                 
     NSLog(@"preparing for segue!");
@@ -120,7 +124,7 @@ This works as long as you don't override `prepareForSegue` in your `UIViewContro
 
 ##### Swift: #####
 
-```
+```swift
 let gestureRecognizer = UIPanGestureRecognizer {
     (gr:UIPanGestureRecognizer)->Void in
                 
@@ -132,7 +136,7 @@ This works with any subclass of UIGestureRecognizer.
 
 ##### Objective-C: #####
 
-```
+```objective-c
 UIPanGestureRecognizer *gestureRecognizer
 = [[UIPanGestureRecognizer alloc] initWithBlock:^(UIGestureRecognizer *gr) {
                 
@@ -145,7 +149,7 @@ UIPanGestureRecognizer *gestureRecognizer
 
 ##### Swift: #####
 
-```
+```swift
 object.deinited {
     println("object has been deinited")
 }
@@ -153,7 +157,7 @@ object.deinited {
 
 ##### Objective-C: #####
 
-```
+```objective-c
 [object deinited:^{
     NSLog(@"object has been deinited");   
 }];
