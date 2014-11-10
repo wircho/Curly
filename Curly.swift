@@ -50,6 +50,18 @@ public extension UIAlertView {
     }
 }
 
+public extension UINavigationController {
+    public func setDelegate(#willShow:((viewController:UIViewController,animated:Bool)->Void)?, didShow:((viewController:UIViewController,animated:Bool)->Void)? = nil) {
+        
+        let delegate = Curly.NavigationControllerDelegate(willShow: willShow, didShow: didShow)
+        
+        self.delegate = delegate
+        
+        objc_setAssociatedObject(self, &CurlyAssociatedDelegateHandle, delegate, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+        
+    }
+}
+
 public extension UIViewController {
     
     
@@ -180,6 +192,41 @@ public extension NSObject {
 
 public class Curly : NSObject {
     
+    //MARK: Performing actions with delay
+    
+    private struct Delay {
+        static var delayKeys:[String:Int] = [:]
+        static var delayCounter:Int = 0
+    }
+    
+    class func delay(delay:Double, closure:()->()) {
+        dispatch_after(
+            dispatch_time(
+                DISPATCH_TIME_NOW,
+                Int64(delay * Double(NSEC_PER_SEC))
+            ),
+            dispatch_get_main_queue(), closure)
+    }
+    
+    class func delay(delay:Double,key:String,closure:()->()) {
+        Delay.delayCounter += 1
+        var counter = Delay.delayCounter
+        Delay.delayKeys[key] = counter
+        
+        self.delay(delay) {
+            if let value = self.Delay.delayKeys[key] {
+                if value == counter {
+                    closure()
+                    self.stopDelay(key)
+                }
+            }
+        }
+    }
+    
+    class func stopDelay(key:String) {
+        Delay.delayKeys[key] = nil
+    }
+    
     //MARK: UIViewController, UIStoryboardSegue
 
     private struct SeguePreparation {
@@ -218,6 +265,33 @@ public class Curly : NSObject {
         
     }
 
+    //MARK: UINavigationController, UINavigationControllerDelegate
+    
+    private class NavigationControllerDelegate: NSObject, UINavigationControllerDelegate {
+        
+        var willShow:((viewController:UIViewController,animated:Bool)->Void)?
+        var didShow:((viewController:UIViewController,animated:Bool)->Void)?
+        
+        init(willShow v_willShow:((viewController:UIViewController,animated:Bool)->Void)?, didShow v_didShow:((viewController:UIViewController,animated:Bool)->Void)?) {
+            willShow = v_willShow
+            didShow = v_didShow
+            super.init()
+        }
+        
+        private func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
+            if willShow != nil {
+                willShow!(viewController: viewController, animated: animated);
+            }
+        }
+        
+        private func navigationController(navigationController: UINavigationController, didShowViewController viewController: UIViewController, animated: Bool) {
+            if didShow != nil {
+                didShow!(viewController: viewController, animated: animated);
+            }
+        }
+        
+    }
+    
     //MARK: UIAlertView, UIAlertViewDelegate
     
     private class AlertViewDelegate: NSObject, UIAlertViewDelegate {
