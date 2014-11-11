@@ -62,6 +62,31 @@ public extension UINavigationController {
     }
 }
 
+public extension UIScrollView {
+    
+    public func setDelegate(
+        #didScroll:((scrollView: UIScrollView) -> Void)?) {
+            
+            let delegate = Curly.ScrollViewDelegate(willBeginDragging:nil,didScroll:didScroll,willEndDragging:nil,didEndDragging:nil,willBeginDecelerating:nil,didEndDecelerating:nil,didEndScrollingAnimation:nil,shouldScrollToTop:nil,didScrollToTop:nil,willBeginZooming:nil,didZoom:nil,didEndZooming:nil,viewForZooming:nil)
+            
+            self.delegate = delegate
+            
+            objc_setAssociatedObject(self, &CurlyAssociatedDelegateHandle, delegate, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+            
+    }
+    
+    public func setDelegate(
+        #willBeginDragging:((scrollView: UIScrollView) -> Void)?,didScroll:((scrollView: UIScrollView) -> Void)?,willEndDragging:((scrollView: UIScrollView, withVelocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) -> Void)?,didEndDragging:((scrollView: UIScrollView, willDecelerate: Bool) -> Void)?,willBeginDecelerating:((scrollView: UIScrollView) -> Void)?,didEndDecelerating:((scrollView: UIScrollView) -> Void)?,didEndScrollingAnimation:((scrollView: UIScrollView) -> Void)?,shouldScrollToTop:((scrollView: UIScrollView) -> Bool)?,didScrollToTop:((scrollView: UIScrollView) -> Void)?,willBeginZooming:((scrollView: UIScrollView, withView: UIView!) -> Void)?,didZoom:((scrollView: UIScrollView) -> Void)?,didEndZooming:((scrollView: UIScrollView, withView: UIView!, atScale: CGFloat) -> Void)?,viewForZooming:((scrollView:UIScrollView)->UIView?)?) {
+        
+        let delegate = Curly.ScrollViewDelegate(willBeginDragging:willBeginDragging,didScroll:didScroll,willEndDragging:willEndDragging,didEndDragging:didEndDragging,willBeginDecelerating:willBeginDecelerating,didEndDecelerating:didEndDecelerating,didEndScrollingAnimation:didEndScrollingAnimation,shouldScrollToTop:shouldScrollToTop,didScrollToTop:didScrollToTop,willBeginZooming:willBeginZooming,didZoom:didZoom,didEndZooming:didEndZooming,viewForZooming:viewForZooming)
+        
+        self.delegate = delegate
+        
+        objc_setAssociatedObject(self, &CurlyAssociatedDelegateHandle, delegate, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+        
+    }
+}
+
 public extension UIViewController {
     
     
@@ -103,6 +128,47 @@ public extension UIGestureRecognizer {
         
         
         objc_setAssociatedObject(self, &CurlyAssociatedDelegateHandle, delegate, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+    }
+}
+
+public extension UIBarButtonItem {
+    convenience init(barButtonSystemItem: UIBarButtonSystemItem, closure:()->Void) {
+        
+        let delegate = Curly.BarButtonItemDelegate(tapped: closure)
+        
+        self.init(barButtonSystemItem: barButtonSystemItem, target:delegate, action:"tappedButtonItem")
+        
+        objc_setAssociatedObject(self, &CurlyAssociatedDelegateHandle, delegate, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+    }
+    
+    convenience init(image: UIImage?, landscapeImagePhone: UIImage?, style: UIBarButtonItemStyle, closure:()->Void) {
+        
+        let delegate = Curly.BarButtonItemDelegate(tapped: closure)
+        
+        self.init(image: image, landscapeImagePhone: landscapeImagePhone, style: style, target:delegate, action:"tappedButtonItem")
+        
+        objc_setAssociatedObject(self, &CurlyAssociatedDelegateHandle, delegate, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+        
+    }
+    
+    convenience init(image: UIImage?, style: UIBarButtonItemStyle, closure:()->Void) {
+        
+        let delegate = Curly.BarButtonItemDelegate(tapped: closure)
+        
+        self.init(image: image, style: style, target:delegate, action:"tappedButtonItem")
+        
+        objc_setAssociatedObject(self, &CurlyAssociatedDelegateHandle, delegate, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+        
+    }
+    
+    convenience init(title: String?, style: UIBarButtonItemStyle, closure:()->Void) {
+        
+        let delegate = Curly.BarButtonItemDelegate(tapped: closure)
+        
+        self.init(title: title, style: style, target:delegate, action:"tappedButtonItem")
+        
+        objc_setAssociatedObject(self, &CurlyAssociatedDelegateHandle, delegate, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+        
     }
 }
 
@@ -265,6 +331,89 @@ public class Curly : NSObject {
         
     }
 
+    //MARK: UIScrollView, UIScrolViewDelegate
+    
+    private class ScrollViewDelegate: NSObject, UIScrollViewDelegate {
+        
+        var willBeginDragging:((scrollView: UIScrollView) -> Void)?
+        var didScroll:((scrollView: UIScrollView) -> Void)?
+        var willEndDragging:((scrollView: UIScrollView, withVelocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) -> Void)?
+        var didEndDragging:((scrollView: UIScrollView, willDecelerate: Bool) -> Void)?
+        var willBeginDecelerating:((scrollView: UIScrollView) -> Void)?
+        var didEndDecelerating:((scrollView: UIScrollView) -> Void)?
+        var didEndScrollingAnimation:((scrollView: UIScrollView) -> Void)?
+        var shouldScrollToTop:((scrollView: UIScrollView) -> Bool)?
+        var didScrollToTop:((scrollView: UIScrollView) -> Void)?
+        var willBeginZooming:((scrollView: UIScrollView, withView: UIView!) -> Void)?
+        var didZoom:((scrollView: UIScrollView) -> Void)?
+        var didEndZooming:((scrollView: UIScrollView, withView: UIView!, atScale: CGFloat) -> Void)?
+        var viewForZooming:((scrollView:UIScrollView)->UIView?)?
+        
+        init(willBeginDragging:((scrollView: UIScrollView) -> Void)?,didScroll:((scrollView: UIScrollView) -> Void)?,willEndDragging:((scrollView: UIScrollView, withVelocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) -> Void)?,didEndDragging:((scrollView: UIScrollView, willDecelerate: Bool) -> Void)?,willBeginDecelerating:((scrollView: UIScrollView) -> Void)?,didEndDecelerating:((scrollView: UIScrollView) -> Void)?,didEndScrollingAnimation:((scrollView: UIScrollView) -> Void)?,shouldScrollToTop:((scrollView: UIScrollView) -> Bool)?,didScrollToTop:((scrollView: UIScrollView) -> Void)?,willBeginZooming:((scrollView: UIScrollView, withView: UIView!) -> Void)?,didZoom:((scrollView: UIScrollView) -> Void)?,didEndZooming:((scrollView: UIScrollView, withView: UIView!, atScale: CGFloat) -> Void)?,viewForZooming:((scrollView:UIScrollView)->UIView?)?){
+            
+            self.willBeginDragging = willBeginDragging
+            self.didScroll = didScroll
+            self.willEndDragging = willEndDragging
+            self.didEndDragging = didEndDragging
+            self.willBeginDecelerating = willBeginDecelerating
+            self.didEndDecelerating = didEndDecelerating
+            self.didEndScrollingAnimation = didEndScrollingAnimation
+            self.shouldScrollToTop = shouldScrollToTop
+            self.didScrollToTop = didScrollToTop
+            self.willBeginZooming = willBeginZooming
+            self.didZoom = didZoom
+            self.didEndZooming = didEndZooming
+            self.viewForZooming = viewForZooming
+            super.init()
+        }
+        
+        private func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+            willBeginDragging?(scrollView:scrollView)
+        }
+        private func scrollViewDidScroll(scrollView: UIScrollView) {
+            didScroll?(scrollView:scrollView)
+        }
+        private func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+            willEndDragging?(scrollView:scrollView,withVelocity:velocity,targetContentOffset:targetContentOffset)
+        }
+        private func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+            didEndDragging?(scrollView:scrollView,willDecelerate:decelerate)
+        }
+        private func scrollViewWillBeginDecelerating(scrollView: UIScrollView) {
+            willBeginDecelerating?(scrollView:scrollView)
+        }
+        private func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+            didEndDecelerating?(scrollView:scrollView)
+        }
+        private func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
+            didEndScrollingAnimation?(scrollView:scrollView)
+        }
+        private func scrollViewShouldScrollToTop(scrollView: UIScrollView) -> Bool {
+            if let b = shouldScrollToTop?(scrollView: scrollView) {
+                return b
+            }else{
+                return true
+            }
+        }
+        private func scrollViewDidScrollToTop(scrollView: UIScrollView) {
+            didScrollToTop?(scrollView: scrollView)
+        }
+        private func scrollViewWillBeginZooming(scrollView: UIScrollView, withView view: UIView!) {
+            willBeginZooming?(scrollView:scrollView,withView:view)
+        }
+        private func scrollViewDidZoom(scrollView: UIScrollView) {
+            didZoom?(scrollView:scrollView)
+        }
+        private func scrollViewDidEndZooming(scrollView: UIScrollView, withView view: UIView!, atScale scale: CGFloat) {
+            didEndZooming?(scrollView:scrollView,withView:view,atScale:scale)
+        }
+        private func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+            return viewForZooming?(scrollView: scrollView)
+        }
+
+    }
+    
+    
     //MARK: UINavigationController, UINavigationControllerDelegate
     
     private class NavigationControllerDelegate: NSObject, UINavigationControllerDelegate {
@@ -273,8 +422,8 @@ public class Curly : NSObject {
         var didShow:((viewController:UIViewController,animated:Bool)->Void)?
         
         init(willShow v_willShow:((viewController:UIViewController,animated:Bool)->Void)?, didShow v_didShow:((viewController:UIViewController,animated:Bool)->Void)?) {
-            willShow = v_willShow
-            didShow = v_didShow
+            self.willShow = v_willShow
+            self.didShow = v_didShow
             super.init()
         }
         
@@ -365,6 +514,21 @@ public class Curly : NSObject {
             }else{
                 return shouldEnableFirstOtherButton!(alertView: alertView)
             }
+        }
+    }
+    
+    //MARK: Bar button item delegate
+    
+    public class BarButtonItemDelegate: NSObject {
+        let tapped:()->Void
+        
+        public func tappedButtonItem() {
+            tapped()
+        }
+        
+        init(tapped:()->Void) {
+            self.tapped = tapped
+            super.init()
         }
     }
     
