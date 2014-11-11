@@ -14,6 +14,7 @@ Contents
   * [Buttons, Sliders, etc (UIControl)](#buttons-sliders-etc-uicontrol)
   * [Storyboard Segues](#storyboard-segues)
   * [Gesture Recognizers](#gesture-recognizers)
+  * [Some Delegates](#some-delegates)
   * [Observing an Object's Deinit (Dealloc)](#observing-an-objects-deinit-dealloc)
 
 1. Installation
@@ -39,7 +40,7 @@ alertView.show(didDismiss:{(alertView:UIAlertView, buttonIndex:Int) -> Void in
             
 })
 ```
-Other methods are: `.show(clicked:)`, `.show(willDismiss:)` and the more complete version `.show(clicked:willPresent:didPresent:willDismiss:didDismiss:canceled:shouldEnableFirstOtherButton:)`
+Other methods are: `.show(clicked:)`, `.show(willDismiss:)` and the more complete version `.show(clicked:,willPresent:,didPresent:,willDismiss:,didDismiss:,canceled:,shouldEnableFirstOtherButton:)`
 
 ##### Objective-C: #####
 
@@ -97,6 +98,8 @@ This works with any subclass of UIControl.
 
 ### Storyboard Segues: ###
 
+The method below works as long as you don't override `prepareForSegue` in your `UIViewController`'s subclass.
+
 ##### Swift: #####
 
 ```swift
@@ -117,8 +120,6 @@ self.performSegueWithIdentifier("segue", sender: nil) {
                 
 }];
 ```
-
-This works as long as you don't override `prepareForSegue` in your `UIViewController`'s subclass.
 
 ### Gesture Recognizers: ###
 
@@ -145,7 +146,56 @@ UIPanGestureRecognizer *gestureRecognizer
 }];
 ```
 
+### Some Delegates: ###
+
+With Curly you can define delegates for UIScrollView and UINavigationController using only closures/blocks.
+
+##### Swift: #####
+
+```swift
+scrollView.setDelegate(
+    didScroll: { (scrollView:UIScrollView) -> Void in
+        println("did scroll")
+    }
+ )
+```
+
+For the complete `UIScrollViewDelegate` functionality use `.setDelegate(willBeginDragging:,didScroll:,willEndDragging:,didEndDragging:,willBeginDecelerating:,didEndDecelerating:,didEndScrollingAnimation:,shouldScrollToTop:,didScrollToTop:,willBeginZooming:,didZoom:,didEndZooming:,viewForZooming:)`
+
+```swift
+navigationController.setDelegate(
+    willShow: { (viewController:UIViewController) -> Void in
+        println("will show")
+    },
+    didShow: { (viewController:UIViewController) -> Void in
+        println("did show")
+    }
+ )
+```
+
+The second parameter `didShow` is optional.
+
+##### Objective-C: #####
+
+```objective-c
+[scrollView setDelegateWithDidScroll:^(UIScrollView *scrollView) {
+    NSLog(@"did scroll");
+}];
+```
+
+For the complete `UIScrollViewDelegate` functionality use `setDelegateWithWillBeginDragging:didScroll:willEndDragging:didEndDragging:willBeginDecelerating:didEndDecelerating:didEndScrollingAnimation:shouldScrollToTop:didScrollToTop:willBeginZooming:didZoom:didEndZooming:viewForZooming:`
+o
+```objective-c
+[navigationController setDelegateWithWillShow:^(UIViewController *viewController, BOOL animated) {
+    NSLog(@"will show");
+} didShow:^(UIViewController *viewController, BOOL animated) {
+    NSLog(@"did show");
+}];
+```
+
 ### Observing an Object's Deinit (Dealloc): ###
+
+The method below works with any subclass of NSObject. Unfortunately, as of now, you cannot refer to your object or its properties inside the closure. In fact, any weak reference to the object will be nil by the time you are in the closure.
 
 ##### Swift: #####
 
@@ -162,5 +212,3 @@ object.deinited {
     NSLog(@"object has been deinited");   
 }];
 ```
-
-This works with any subclass of NSObject. Unfortunately, as of now, you cannot refer to your object or its properties inside the closure. In fact, any weak reference to the object will be nil by the time you are in the closure.
