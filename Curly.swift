@@ -15,6 +15,7 @@ import UIKit
 var CurlyAssociatedDelegateHandle: UInt8 = 0
 var CurlyAssociatedDelegateDictionaryHandle: UInt8 = 0
 var CurlyAssociatedDeinitDelegateArrayHandle: UInt8 = 0
+var CurlyAssociatedLayoutDelegateHandle: UInt8 = 0
 
 //MARK: Extensions
 
@@ -250,6 +251,24 @@ public extension NSObject {
         }
         
         objc_setAssociatedObject(self, &CurlyAssociatedDeinitDelegateArrayHandle, nil, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+    }
+    
+}
+
+public extension UIView {
+    
+    public func layoutSubviews() {
+        let layoutDelegate = objc_getAssociatedObject(self,&CurlyAssociatedLayoutDelegateHandle) as Curly.LayoutDelegate?
+        
+        layoutDelegate?.layout(self)
+    }
+    
+    public func layout<T:UIView>(closure:(T)->Void) {
+        
+        let layoutDelegate = Curly.LayoutDelegate(closure:closure)
+        
+        objc_setAssociatedObject(self, &CurlyAssociatedLayoutDelegateHandle,layoutDelegate, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+        
     }
     
 }
@@ -574,7 +593,24 @@ public class Curly : NSObject {
         }
     }
     
-    //MARK Deinit delegate
+    //MARK: UIView layout delegate
+    
+    public class LayoutDelegate: NSObject {
+        public let closure:(UIView)->Void
+        
+        func layout(v:UIView) {
+            closure(v)
+        }
+        
+        init<T:UIView>(closure:(T)->Void) {
+            self.closure = {
+                closure($0 as T)
+            }
+            super.init()
+        }
+    }
+    
+    //MARK: Deinit delegate
     
     public class DeinitDelegate: NSObject {
         

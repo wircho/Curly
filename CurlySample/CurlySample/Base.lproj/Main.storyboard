@@ -95,6 +95,16 @@
                                     <segue destination="7b7-9H-kid" kind="show" id="hSw-XL-DUE"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GOO-vR-VRf">
+                                <rect key="frame" x="243.5" y="435" width="113" height="30"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="Layout subviews">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="KOI-Wj-wpN" kind="show" id="Fzm-CL-c2a"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -102,6 +112,7 @@
                             <constraint firstItem="57d-hq-hiA" firstAttribute="top" secondItem="xwy-63-IEV" secondAttribute="bottom" constant="20" id="7n2-v9-BVO"/>
                             <constraint firstAttribute="centerX" secondItem="57d-hq-hiA" secondAttribute="centerX" id="Hm6-zb-HQA"/>
                             <constraint firstItem="xwy-63-IEV" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="30" id="Joi-D6-2mx"/>
+                            <constraint firstItem="GOO-vR-VRf" firstAttribute="top" secondItem="Jns-Vn-eCg" secondAttribute="bottom" constant="10" id="Kzb-uH-9t0"/>
                             <constraint firstItem="wr4-9w-AQb" firstAttribute="top" secondItem="57d-hq-hiA" secondAttribute="bottom" constant="10" id="NWx-5A-DXg"/>
                             <constraint firstAttribute="centerX" secondItem="xwy-63-IEV" secondAttribute="centerX" id="RLV-HL-CYm"/>
                             <constraint firstAttribute="centerX" secondItem="UBE-o7-HUj" secondAttribute="centerX" id="ck4-vj-8ek"/>
@@ -111,6 +122,7 @@
                             <constraint firstAttribute="centerX" secondItem="Ml3-rx-Fhh" secondAttribute="centerX" id="kvf-08-P0o"/>
                             <constraint firstAttribute="centerX" secondItem="wr4-9w-AQb" secondAttribute="centerX" id="n4q-6c-bha"/>
                             <constraint firstItem="OeH-PL-0mU" firstAttribute="top" secondItem="wr4-9w-AQb" secondAttribute="bottom" constant="10" id="rTa-FP-IvZ"/>
+                            <constraint firstAttribute="centerX" secondItem="GOO-vR-VRf" secondAttribute="centerX" id="tC2-LN-mfq"/>
                             <constraint firstItem="UBE-o7-HUj" firstAttribute="top" secondItem="Ml3-rx-Fhh" secondAttribute="bottom" constant="10" id="teW-Eu-Jar"/>
                             <constraint firstAttribute="centerX" secondItem="OeH-PL-0mU" secondAttribute="centerX" id="x6O-Qr-6vx"/>
                             <constraint firstAttribute="centerX" secondItem="Jns-Vn-eCg" secondAttribute="centerX" id="znh-lL-q3M"/>
@@ -348,7 +360,7 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l0l-ov-zk9">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="2388.5"/>
-                                        <mutableString key="text">Bacon ipsum dolor amet duis dolore id quis. Tongue flank chicken cupim chuck nulla sausage turducken swine ea dolor pariatur elit filet mignon brisket. Ex quis prosciutto, duis est flank qui ribeye spare ribs velit aliquip dolor strip steak eiusmod enim. Exercitation officia commodo, dolore biltong magna duis.
+                                        <string key="text">Bacon ipsum dolor amet duis dolore id quis. Tongue flank chicken cupim chuck nulla sausage turducken swine ea dolor pariatur elit filet mignon brisket. Ex quis prosciutto, duis est flank qui ribeye spare ribs velit aliquip dolor strip steak eiusmod enim. Exercitation officia commodo, dolore biltong magna duis.
 
 Hamburger in est nulla, cow ea enim tail turducken anim sirloin pancetta biltong. Cupim rump brisket biltong. Turkey turducken sirloin ham, est aliqua ea cillum minim beef tongue voluptate landjaeger. Corned beef alcatra proident ham strip steak short loin picanha pork belly dolore qui ullamco pork frankfurter venison excepteur.
 
@@ -366,7 +378,7 @@ Ex landjaeger cupim corned beef mollit dolor non sunt deserunt chicken brisket. 
 
 Sausage eu hamburger turducken pork belly turkey. Doner short loin cow esse dolore. Quis jerky est, adipisicing aliqua beef ribs ground round pancetta shankle turducken. Ball tip in deserunt picanha boudin kevin aute tail prosciutto. Fugiat shank sed, pariatur aliquip et meatball in turducken est strip steak drumstick meatloaf short loin pork chop. Excepteur meatloaf qui flank bresaola rump porchetta. Enim consequat veniam fatback.
 
-Ut strip steak drumstick labore. Ut labore ad sed cow pork belly sint kevin ex et tri-tip ham hock in. Enim fugiat salami kevin drumstick veniam mollit anim culpa pastrami bacon tenderloin id. Dolore t-bone kielbasa, andouille commodo fugiat irure venison ut qui occaecat chuck. Commodo ground round pastrami pork belly strip steak, dolore jerky cillum pork in. Pork chop doner ham, pig pork belly in brisket venison spare ribs dolore ipsum qui jowl ut. Chuck ut pig aute, meatloaf picanha mollit.</mutableString>
+Ut strip steak drumstick labore. Ut labore ad sed cow pork belly sint kevin ex et tri-tip ham hock in. Enim fugiat salami kevin drumstick veniam mollit anim culpa pastrami bacon tenderloin id. Dolore t-bone kielbasa, andouille commodo fugiat irure venison ut qui occaecat chuck. Commodo ground round pastrami pork belly strip steak, dolore jerky cillum pork in. Pork chop doner ham, pig pork belly in brisket venison spare ribs dolore ipsum qui jowl ut. Chuck ut pig aute, meatloaf picanha mollit.</string>
                                         <fontDescription key="fontDescription" name="TrebuchetMS-Italic" family="Trebuchet MS" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -408,6 +420,26 @@ Ut strip steak drumstick labore. Ut labore ad sed cow pork belly sint kevin ex e
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kNe-cu-fCo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="980" y="3618"/>
+        </scene>
+        <!--Layout Subviews-->
+        <scene sceneID="LO3-u1-c0Y">
+            <objects>
+                <viewController id="KOI-Wj-wpN" customClass="LayoutViewController" customModule="CurlySample" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="C1x-gc-TzI"/>
+                        <viewControllerLayoutGuide type="bottom" id="uZ3-ML-atu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8hB-i0-VJo">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" title="Layout Subviews" id="RiG-mc-tEe"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aVr-v2-PVz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1003" y="4514"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="4yk-JH-F6a">
