@@ -10,8 +10,8 @@ Contents
 
 1. [Installation](#1-installation)
 2. [Usage](#2-usage)
-  * [Alert Views](#alert-views)
   * [Buttons, Sliders, etc (UIControl)](#buttons-sliders-etc-uicontrol)
+  * [Alert Views](#alert-views)
   * [Storyboard Segues](#storyboard-segues)
   * [Gesture Recognizers](#gesture-recognizers)
   * [Some Delegates](#some-delegates)
@@ -28,31 +28,6 @@ This library is written in **Swift** but it also works in **Objective-C**. If yo
 -----
 
 You can preview the functionality below by running the sample project in the **CurlySample** folder
-
-### Alert Views: ###
-
-##### Swift: #####
-
-```swift
-alertView.show(didDismiss:{(alertView:UIAlertView, buttonIndex:Int) -> Void in
-
-    println("dismissed with button at index \(buttonIndex)")
-            
-})
-```
-Other methods are: `.show(clicked:)`, `.show(willDismiss:)` and the more complete version `.show(clicked:,willPresent:,didPresent:,willDismiss:,didDismiss:,canceled:,shouldEnableFirstOtherButton:)`
-
-##### Objective-C: #####
-
-```objective-c
-[alertView showWithDidDismiss:^(UIAlertView *alertView, NSInteger buttonIndex) {
-
-    NSLog(@"dismissed with button at index %d",(int)buttonIndex);
-    
-}];
-```
-
-The other Objective-C methods are: `showWithclicked:`, `.showWithWillDismiss:` and the more complete version `showWithClicked:willPresent:didPresent:willDismiss:didDismiss:canceled:shouldEnableFirstOtherButton:`
 
 ### Buttons, Sliders, etc (UIControl): ###
 
@@ -95,6 +70,31 @@ This works with any subclass of UIControl.
                 
 }];
 ```
+
+### Alert Views: ###
+
+##### Swift: #####
+
+```swift
+alertView.show(didDismiss:{(alertView:UIAlertView, buttonIndex:Int) -> Void in
+
+    println("dismissed with button at index \(buttonIndex)")
+            
+})
+```
+Other methods are: `.show(clicked:)`, `.show(willDismiss:)` and the more complete version `.show(clicked:,willPresent:,didPresent:,willDismiss:,didDismiss:,canceled:,shouldEnableFirstOtherButton:)`
+
+##### Objective-C: #####
+
+```objective-c
+[alertView showWithDidDismiss:^(UIAlertView *alertView, NSInteger buttonIndex) {
+
+    NSLog(@"dismissed with button at index %d",(int)buttonIndex);
+    
+}];
+```
+
+The other Objective-C methods are: `showWithclicked:`, `.showWithWillDismiss:` and the more complete version `showWithClicked:willPresent:didPresent:willDismiss:didDismiss:canceled:shouldEnableFirstOtherButton:`
 
 ### Storyboard Segues: ###
 
