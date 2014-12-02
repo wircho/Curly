@@ -255,15 +255,32 @@ public extension NSObject {
     
 }
 
+var CurlyAlreadyReplaceLayoutSubviewsMethod = false
+
 public extension UIView {
     
-    public func layoutSubviews() {
+    public func _layoutSubviews() {
+        
         let layoutDelegate = objc_getAssociatedObject(self,&CurlyAssociatedLayoutDelegateHandle) as Curly.LayoutDelegate?
         
         layoutDelegate?.layout(self)
+        
+        self._layoutSubviews()
+        
     }
     
     public func layout<T:UIView>(closure:(T)->Void) {
+        
+        if !CurlyAlreadyReplaceLayoutSubviewsMethod {
+            
+            method_exchangeImplementations(
+                class_getInstanceMethod(UIView.self,"layoutSubviews"),
+                class_getInstanceMethod(UIView.self,"_layoutSubviews")
+            )
+            
+            CurlyAlreadyReplaceLayoutSubviewsMethod = true
+            
+        }
         
         let layoutDelegate = Curly.LayoutDelegate(closure:closure)
         
