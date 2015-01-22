@@ -16,8 +16,13 @@ var CurlyAssociatedDelegateHandle: UInt8 = 0
 var CurlyAssociatedDelegateDictionaryHandle: UInt8 = 0
 var CurlyAssociatedDeinitDelegateArrayHandle: UInt8 = 0
 var CurlyAssociatedLayoutDelegateHandle: UInt8 = 0
+var CurlyAssociatedConnectionDelegateHandle: UInt8 = 0
 
 //MARK: Extensions
+
+//MARK: Extensions
+
+
 
 public extension UIAlertView {
     public func show(#clicked:(alertView:UIAlertView,buttonIndex:Int)->Void) {
@@ -290,9 +295,82 @@ public extension UIView {
     
 }
 
+//TODO: Document this
+
+public extension NSURLConnection {
+    public class func sendAndReturnAsynchronousRequest(request: NSURLRequest, queue: NSOperationQueue!, completionHandler:(NSURLResponse!, NSData!, NSError!) -> Void) -> NSURLConnection! {
+        
+        let delegate = Curly.ConnectionDelegate(done:completionHandler)
+        
+        let connection = NSURLConnection(
+            request: request,
+            delegate: delegate,
+            startImmediately: true
+        )
+        
+        if connection != nil {
+            objc_setAssociatedObject(connection!, &CurlyAssociatedConnectionDelegateHandle,delegate, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+        }
+        
+        return connection
+        
+    }
+}
+
+
+
 //MARK: Curly class
 
 public class Curly : NSObject {
+    
+    //MARK: NSURLConnection
+    
+    //TODO: Document this
+    private class ConnectionDelegate: NSObject,NSURLConnectionDelegate,NSURLConnectionDataDelegate {
+        
+        var done:(NSURLResponse!, NSData!, NSError!) -> Void
+        
+        init(done:(NSURLResponse!, NSData!, NSError!) -> Void) {
+            self.done = done
+            super.init()
+        }
+        
+        private func connection(connection: NSURLConnection, didFailWithError error: NSError) {
+            self.error = error
+            callDone()
+        }
+        
+        private func callDone() {
+            if !doneFlag {
+                done(response,data,error)
+            }
+            doneFlag = true
+        }
+        
+        var data:NSMutableData!
+        
+        var response:NSURLResponse!
+        
+        var error:NSError!
+        
+        var doneFlag = false
+        
+        private func connection(connection: NSURLConnection, didReceiveData data: NSData) {
+            if self.data == nil {
+                self.data = NSMutableData(data: data)
+            }else {
+                self.data.appendData(data)
+            }
+        }
+        
+        private func connectionDidFinishLoading(connection: NSURLConnection) {
+            callDone()
+        }
+        
+        private func connection(connection: NSURLConnection, didReceiveResponse response: NSURLResponse) {
+            self.response = response
+        }
+    }
     
     //MARK: Performing actions with delay
     
@@ -604,7 +682,6 @@ public class Curly : NSObject {
                 if let ctl = control as? T {
                     received(ctl)
                 }
-                
             }
             super.init()
         }
@@ -644,6 +721,18 @@ public class Curly : NSObject {
             super.init()
         }
         
+    }
+    
+    //MARK: Conditioned callbacks
+    //TODO: Document this
+    
+    public class func conditionedClosure<T>(condition:()->Bool,closure:T->Void) -> (T->Void) {
+        return {
+            (a:T) -> Void in
+            if condition() {
+                closure(a)
+            }
+        }
     }
     
 }
