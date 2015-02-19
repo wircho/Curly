@@ -17,11 +17,33 @@ var CurlyAssociatedDelegateDictionaryHandle: UInt8 = 0
 var CurlyAssociatedDeinitDelegateArrayHandle: UInt8 = 0
 var CurlyAssociatedLayoutDelegateHandle: UInt8 = 0
 var CurlyAssociatedConnectionDelegateHandle: UInt8 = 0
+var CurlyAssociatedRetainedObjectsDelegateHandle: UInt8 = 0
+
 
 //MARK: Extensions
 
-//MARK: Extensions
-
+//TODO: documment this!
+public extension NSObject {
+    
+    public func retainObject(object:AnyObject,withKey key:String) {
+        var associatedObject:[String:AnyObject] = (objc_getAssociatedObject(self, &CurlyAssociatedRetainedObjectsDelegateHandle) as? [String:AnyObject]) ?? [:]
+        associatedObject[key] = object
+        objc_setAssociatedObject(self, &CurlyAssociatedRetainedObjectsDelegateHandle, associatedObject, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+        
+    }
+    
+    public func releaseObjectWithKey(key:String) {
+        var associatedObject:[String:AnyObject] = (objc_getAssociatedObject(self, &CurlyAssociatedRetainedObjectsDelegateHandle) as? [String:AnyObject]) ?? [:]
+        associatedObject[key] = nil
+        objc_setAssociatedObject(self, &CurlyAssociatedRetainedObjectsDelegateHandle, associatedObject, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+    }
+    
+    public func retainedObjectWithKey(key:String) -> AnyObject? {
+        var associatedObject:[String:AnyObject] = (objc_getAssociatedObject(self, &CurlyAssociatedRetainedObjectsDelegateHandle) as? [String:AnyObject]) ?? [:]
+        return associatedObject[key]
+    }
+    
+}
 
 
 public extension UIAlertView {
@@ -726,14 +748,127 @@ public class Curly : NSObject {
     //MARK: Conditioned callbacks
     //TODO: Document this
     
-    public class func conditionedClosure<T>(condition:()->Bool,closure:T->Void) -> (T->Void) {
+    public class func conditionedClosure<T>(condition:(()->Bool)!,closure:T->Void) -> (T->Void) {
         return {
             (a:T) -> Void in
-            if condition() {
+            if condition == nil || condition() {
                 closure(a)
             }
         }
     }
+    
+    //MARK: Merge callbacks
+    //TODO: Document this
+    
+    public class func splitClosures<A,B>(closure:(A,B)->Void) -> (A->Void,B->Void) {
+        
+        var savedA:[A] = []
+        var savedB:[B] = []
+        
+        var readyClosure:()->Void = {
+            
+            if savedA.count > 0 && savedB.count > 0 {
+                closure(savedA.first!,savedB.first!)
+            }
+            
+        }
+        
+        var aClosure:A->Void = {
+            a in
+            savedA = [a]
+            readyClosure()
+        }
+        
+        var bClosure:B->Void = {
+            b in
+            savedB = [b]
+            readyClosure()
+        }
+        
+        return (aClosure,bClosure)
+        
+    }
+    
+    public class func mergeClosures(closureA:()->Void, _ closureB:()->Void) -> (()->Void) {
+        
+        return {
+            closureA()
+            closureB()
+        }
+        
+    }
+    
+    public class func mergeClosures<A>(closureA:A->Void, _ closureB:()->Void) -> (A->Void) {
+        
+        return {
+            a in
+            closureA(a)
+            closureB()
+        }
+        
+    }
+    
+    public class func mergeClosures<B>(closureA:()->Void, _ closureB:B->Void) -> (B->Void) {
+        
+        return {
+            b in
+            closureA()
+            closureB(b)
+        }
+        
+    }
+    
+    public class func mergeClosures<A,B>(closureA:A->Void, _ closureB:B->Void) -> ((A,B)->Void) {
+        
+        return {
+            (a,b) in
+            closureA(a)
+            closureB(b)
+        }
+        
+    }
+    
+    public class func splitClosure<A>(count:Int,_ closure:[A]->Void) -> [A->Void] {
+        var saved:[Int:A] = [:]
+        
+        let readyClosure:()->Void = {
+            var done = true
+            for var i=0; i<count; i+=1 {
+                if saved[i] == nil {
+                    done = false
+                    break
+                }
+            }
+            if done {
+                var array:[A] = []
+                for var i=0; i<count; i+=1 {
+                    array.append(saved[i]!)
+                }
+                closure(array)
+            }
+        }
+        
+        var closures:[A->Void] = []
+        for var i=0; i<count; i+=1 {
+            let j = i
+            closures.append{
+                a in
+                saved[j] = a
+                readyClosure()
+            }
+            
+        }
+        
+        return closures
+    }
+    
+    public class func holdingClosure<T>(value:T,closure:T->Void) -> ()->Void {
+        return {
+            closure(value)
+        }
+    }
+    
+    
     
 }
 
