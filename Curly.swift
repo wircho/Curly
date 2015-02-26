@@ -315,6 +315,60 @@ public extension UIView {
         
     }
     
+    //TODO: Document this
+    
+    public func setHidden(hidden:Bool,afterDuration duration:Double) {
+        
+        let hiddenKey = "CurlyHidden"
+        
+        let initialAlpha = self.alpha
+        
+        let number:NSNumber = (self.retainedObjectWithKey(hiddenKey) as? NSNumber) ?? NSNumber(integer: 0)
+        
+        let animationIndex = number.integerValue + 1
+        
+        self.retainObject(NSNumber(integer:animationIndex), withKey: hiddenKey)
+        
+        if hidden {
+            
+            UIView.animateWithDuration(duration,
+                animations: { () -> Void in
+                    self.alpha = 0
+                },
+                completion: {
+                    [weak self]
+                    (_:Bool) -> Void in
+                    
+                    if let s = self {
+                        let number:NSNumber = (s.retainedObjectWithKey(hiddenKey) as? NSNumber) ?? NSNumber(integer: 0)
+                        
+                        s.alpha = initialAlpha
+                        
+                        if number.integerValue == animationIndex {
+                            
+                            s.hidden = true
+                            
+                        }
+                    }
+                    
+                }
+            )
+            
+        }else {
+            if self.hidden {
+                self.hidden = false
+                self.alpha = 0
+            }
+            
+            UIView.animateWithDuration(duration, animations: { () -> Void in
+                self.alpha = initialAlpha
+            })
+            
+        }
+        
+    }
+    
+    
 }
 
 //TODO: Document this
@@ -645,6 +699,7 @@ public class Curly : NSObject {
         }
         
         private func alertViewShouldEnableFirstOtherButton(alertView: UIAlertView) -> Bool {
+            println("should enable???")
             if shouldEnableFirstOtherButton == nil {
                 return true
             }else{
