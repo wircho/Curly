@@ -449,6 +449,23 @@ public class Curly : NSObject {
         }
     }
     
+    //MARK: For this and that
+    //TODO: Document this
+    class func forThis<T>(this:T?,andThat that:T->T?) {
+        if let t = this {
+            forThis(that(t), andThat:that)
+        }
+    }
+    
+    class func forThis<T>(this:T?,andThat that:T->[T]) {
+        if let t = this {
+            let a = that(t)
+            for x in a {
+                forThis(x, andThat: that)
+            }
+        }
+    }
+    
     //MARK: Performing actions with delay
     
     private struct Delay {
