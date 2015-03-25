@@ -26,16 +26,19 @@ var CurlyAssociatedRetainedObjectsDelegateHandle: UInt8 = 0
 public extension NSObject {
     
     public func retainObject(object:AnyObject,withKey key:String) {
-        var associatedObject:[String:AnyObject] = (objc_getAssociatedObject(self, &CurlyAssociatedRetainedObjectsDelegateHandle) as? [String:AnyObject]) ?? [:]
-        associatedObject = (associatedObject as NSDictionary).copy() as [String:AnyObject]
-        associatedObject[key] = object
+        var associatedObject = (objc_getAssociatedObject(self, &CurlyAssociatedRetainedObjectsDelegateHandle) as? NSDictionary) ?? NSDictionary()
+        var mutableAssociatedObject = associatedObject.mutableCopy() as NSMutableDictionary
+        mutableAssociatedObject[key] = object
+        associatedObject = mutableAssociatedObject.copy() as NSDictionary
         objc_setAssociatedObject(self, &CurlyAssociatedRetainedObjectsDelegateHandle, associatedObject, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
         
     }
     
     public func releaseObjectWithKey(key:String) {
-        var associatedObject:[String:AnyObject] = (objc_getAssociatedObject(self, &CurlyAssociatedRetainedObjectsDelegateHandle) as? [String:AnyObject]) ?? [:]
-        associatedObject[key] = nil
+        var associatedObject = (objc_getAssociatedObject(self, &CurlyAssociatedRetainedObjectsDelegateHandle) as? NSDictionary) ?? NSDictionary()
+        var mutableAssociatedObject = associatedObject.mutableCopy() as NSMutableDictionary
+        mutableAssociatedObject[key] = nil
+        associatedObject = mutableAssociatedObject.copy() as NSDictionary
         objc_setAssociatedObject(self, &CurlyAssociatedRetainedObjectsDelegateHandle, associatedObject, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
     }
     
