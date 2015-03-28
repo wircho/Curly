@@ -821,6 +821,30 @@ public class Curly : NSObject {
         
     }
     
+    //MARK: Cancel then do
+    //TODO: Document this
+    
+    public class func cancelConditionForObject(object:NSObject,key:String) -> ()->Bool {
+        let cKey = "CurlyCondition" + key
+        
+        let number = ((object.retainedObjectWithKey(cKey) as? NSNumber)?.integerValue ?? 0) + 1
+        
+        object.retainObject(NSNumber(integer: number), withKey: cKey)
+        
+        return {
+            [weak object]
+            ()->Bool in
+            
+            let n = (object?.retainedObjectWithKey(cKey) as? NSNumber)?.integerValue
+            
+            let t = n != nil && n! == number
+            
+            //println("CONDITION RETURNING \(t) because n=\(n)")
+            
+            return t
+        }
+    }
+    
     //MARK: Conditioned callbacks
     //TODO: Document this
     
