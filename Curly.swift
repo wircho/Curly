@@ -37,7 +37,7 @@ public extension NSObject {
     public func releaseObjectWithKey(key:String) {
         var associatedObject = (objc_getAssociatedObject(self, &CurlyAssociatedRetainedObjectsDelegateHandle) as? NSDictionary) ?? NSDictionary()
         var mutableAssociatedObject = associatedObject.mutableCopy() as NSMutableDictionary
-        mutableAssociatedObject[key] = nil
+        mutableAssociatedObject.removeObjectForKey(key)
         associatedObject = mutableAssociatedObject.copy() as NSDictionary
         objc_setAssociatedObject(self, &CurlyAssociatedRetainedObjectsDelegateHandle, associatedObject, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
     }
