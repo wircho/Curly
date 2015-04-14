@@ -27,18 +27,18 @@ public extension NSObject {
     
     public func retainObject(object:AnyObject,withKey key:String) {
         var associatedObject = (objc_getAssociatedObject(self, &CurlyAssociatedRetainedObjectsDelegateHandle) as? NSDictionary) ?? NSDictionary()
-        var mutableAssociatedObject = associatedObject.mutableCopy() as NSMutableDictionary
+        var mutableAssociatedObject = associatedObject.mutableCopy() as! NSMutableDictionary
         mutableAssociatedObject[key] = object
-        associatedObject = mutableAssociatedObject.copy() as NSDictionary
+        associatedObject = mutableAssociatedObject.copy() as! NSDictionary
         objc_setAssociatedObject(self, &CurlyAssociatedRetainedObjectsDelegateHandle, associatedObject, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
         
     }
     
     public func releaseObjectWithKey(key:String) {
         var associatedObject = (objc_getAssociatedObject(self, &CurlyAssociatedRetainedObjectsDelegateHandle) as? NSDictionary) ?? NSDictionary()
-        var mutableAssociatedObject = associatedObject.mutableCopy() as NSMutableDictionary
+        var mutableAssociatedObject = associatedObject.mutableCopy() as! NSMutableDictionary
         mutableAssociatedObject.removeObjectForKey(key)
-        associatedObject = mutableAssociatedObject.copy() as NSDictionary
+        associatedObject = mutableAssociatedObject.copy() as! NSDictionary
         objc_setAssociatedObject(self, &CurlyAssociatedRetainedObjectsDelegateHandle, associatedObject, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
     }
     
@@ -119,10 +119,14 @@ public extension UIScrollView {
     }
 }
 
+
 public extension UIViewController {
     
     
     public func performSegueWithIdentifier(identifier: String?, sender: AnyObject?, preparation:(UIStoryboardSegue,AnyObject?)->Void) {
+        
+        //TODO: Remove this functionality or fix it. Remove from documentation
+        assertionFailure("Segues with preparation closure are no longer supported by Curly. Swift 1.2 makes it almost impossible.")
         
         if let id = identifier {
             Curly.registerSeguePreparation(id, viewController: self, preparation: preparation)
@@ -134,16 +138,16 @@ public extension UIViewController {
         
     }
     
-    public func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-
-        if let id = segue.identifier {
-            if let (index,preparation) = Curly.getSeguePreparation(id, viewController: self) {
-                preparation(segue,sender)
-                Curly.unregisterSeguePreparation(index)
-            }
-        }
-
-    }
+//    public func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        
+//        if let id = segue.identifier {
+//            if let (index,preparation) = Curly.getSeguePreparation(id, viewController: self) {
+//                preparation(segue,sender)
+//                Curly.unregisterSeguePreparation(index)
+//            }
+//        }
+//        
+//    }
 }
 
 public extension UIGestureRecognizer {
@@ -214,7 +218,7 @@ public extension UIControl {
     
     public func addAction<T:UIControl>(events:UIControlEvents,closure:(T)->Void) {
 
-        var delegateDictionary = objc_getAssociatedObject(self, &CurlyAssociatedDelegateDictionaryHandle) as [UInt:[Curly.ControlDelegate]]!
+        var delegateDictionary = objc_getAssociatedObject(self, &CurlyAssociatedDelegateDictionaryHandle) as! [UInt:[Curly.ControlDelegate]]!
 
         if delegateDictionary == nil {
             delegateDictionary = [:]
@@ -236,7 +240,7 @@ public extension UIControl {
 
     public func removeActions(events:UIControlEvents) {
         
-        var delegateDictionary = objc_getAssociatedObject(self, &CurlyAssociatedDelegateDictionaryHandle) as [UInt:[Curly.ControlDelegate]]!
+        var delegateDictionary = objc_getAssociatedObject(self, &CurlyAssociatedDelegateDictionaryHandle) as! [UInt:[Curly.ControlDelegate]]!
 
         if delegateDictionary == nil {
             return
@@ -258,7 +262,7 @@ public extension UIControl {
 public extension NSObject {
     
     public func deinited(closure:()->Void) {
-        var deinitArray = objc_getAssociatedObject(self, &CurlyAssociatedDeinitDelegateArrayHandle) as [Curly.DeinitDelegate]!
+        var deinitArray = objc_getAssociatedObject(self, &CurlyAssociatedDeinitDelegateArrayHandle) as! [Curly.DeinitDelegate]!
         
         if deinitArray == nil {
             deinitArray = []
@@ -271,7 +275,7 @@ public extension NSObject {
     }
     
     public func removeDeinitObservers() {
-        var deinitArray = objc_getAssociatedObject(self, &CurlyAssociatedDeinitDelegateArrayHandle) as [Curly.DeinitDelegate]!
+        var deinitArray = objc_getAssociatedObject(self, &CurlyAssociatedDeinitDelegateArrayHandle) as! [Curly.DeinitDelegate]!
         
         if deinitArray == nil {
             return
@@ -292,7 +296,7 @@ public extension UIView {
     
     public func _layoutSubviews() {
         
-        let layoutDelegate = objc_getAssociatedObject(self,&CurlyAssociatedLayoutDelegateHandle) as Curly.LayoutDelegate?
+        let layoutDelegate = objc_getAssociatedObject(self,&CurlyAssociatedLayoutDelegateHandle) as! Curly.LayoutDelegate?
         
         layoutDelegate?.layout(self)
         
@@ -796,7 +800,7 @@ public class Curly : NSObject {
         
         init<T:UIView>(closure:(T)->Void) {
             self.closure = {
-                closure($0 as T)
+                closure($0 as! T)
             }
             super.init()
         }
