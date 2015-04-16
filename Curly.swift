@@ -20,6 +20,7 @@ var CurlyAssociatedConnectionDelegateHandle: UInt8 = 0
 var CurlyAssociatedRetainedObjectsDelegateHandle: UInt8 = 0
 
 
+
 //MARK: Extensions
 
 //TODO: documment this!
@@ -76,7 +77,7 @@ public extension UIAlertView {
             self.delegate = delegate
             
             objc_setAssociatedObject(self, &CurlyAssociatedDelegateHandle, delegate, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
-
+            
             self.show()
 
     }
@@ -548,7 +549,7 @@ public class Curly : NSObject {
 
     //MARK: UIScrollView, UIScrolViewDelegate
     
-    private class ScrollViewDelegate: NSObject, UIScrollViewDelegate {
+    public class ScrollViewDelegate: NSObject, UIScrollViewDelegate {
         
         var willBeginDragging:((scrollView: UIScrollView) -> Void)?
         var didScroll:((scrollView: UIScrollView) -> Void)?
@@ -582,47 +583,47 @@ public class Curly : NSObject {
             super.init()
         }
         
-        private func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        public func scrollViewWillBeginDragging(scrollView: UIScrollView) {
             willBeginDragging?(scrollView:scrollView)
         }
-        private func scrollViewDidScroll(scrollView: UIScrollView) {
+        public func scrollViewDidScroll(scrollView: UIScrollView) {
             didScroll?(scrollView:scrollView)
         }
-        private func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        public func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
             willEndDragging?(scrollView:scrollView,withVelocity:velocity,targetContentOffset:targetContentOffset)
         }
-        private func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        public func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
             didEndDragging?(scrollView:scrollView,willDecelerate:decelerate)
         }
-        private func scrollViewWillBeginDecelerating(scrollView: UIScrollView) {
+        public func scrollViewWillBeginDecelerating(scrollView: UIScrollView) {
             willBeginDecelerating?(scrollView:scrollView)
         }
-        private func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        public func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
             didEndDecelerating?(scrollView:scrollView)
         }
-        private func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
+        public func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
             didEndScrollingAnimation?(scrollView:scrollView)
         }
-        private func scrollViewShouldScrollToTop(scrollView: UIScrollView) -> Bool {
+        public func scrollViewShouldScrollToTop(scrollView: UIScrollView) -> Bool {
             if let b = shouldScrollToTop?(scrollView: scrollView) {
                 return b
             }else{
                 return true
             }
         }
-        private func scrollViewDidScrollToTop(scrollView: UIScrollView) {
+        public func scrollViewDidScrollToTop(scrollView: UIScrollView) {
             didScrollToTop?(scrollView: scrollView)
         }
-        private func scrollViewWillBeginZooming(scrollView: UIScrollView, withView view: UIView!) {
+        public func scrollViewWillBeginZooming(scrollView: UIScrollView, withView view: UIView!) {
             willBeginZooming?(scrollView:scrollView,withView:view)
         }
-        private func scrollViewDidZoom(scrollView: UIScrollView) {
+        public func scrollViewDidZoom(scrollView: UIScrollView) {
             didZoom?(scrollView:scrollView)
         }
-        private func scrollViewDidEndZooming(scrollView: UIScrollView, withView view: UIView!, atScale scale: CGFloat) {
+        public func scrollViewDidEndZooming(scrollView: UIScrollView, withView view: UIView!, atScale scale: CGFloat) {
             didEndZooming?(scrollView:scrollView,withView:view,atScale:scale)
         }
-        private func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        public func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
             return viewForZooming?(scrollView: scrollView)
         }
 
@@ -631,7 +632,7 @@ public class Curly : NSObject {
     
     //MARK: UINavigationController, UINavigationControllerDelegate
     
-    private class NavigationControllerDelegate: NSObject, UINavigationControllerDelegate {
+    public class NavigationControllerDelegate: NSObject, UINavigationControllerDelegate {
         
         var willShow:((viewController:UIViewController,animated:Bool)->Void)?
         var didShow:((viewController:UIViewController,animated:Bool)->Void)?
@@ -642,13 +643,13 @@ public class Curly : NSObject {
             super.init()
         }
         
-        private func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
+        public func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
             if willShow != nil {
                 willShow!(viewController: viewController, animated: animated);
             }
         }
         
-        private func navigationController(navigationController: UINavigationController, didShowViewController viewController: UIViewController, animated: Bool) {
+        public func navigationController(navigationController: UINavigationController, didShowViewController viewController: UIViewController, animated: Bool) {
             if didShow != nil {
                 didShow!(viewController: viewController, animated: animated);
             }
@@ -658,7 +659,7 @@ public class Curly : NSObject {
     
     //MARK: UIAlertView, UIAlertViewDelegate
     
-    private class AlertViewDelegate: NSObject, UIAlertViewDelegate {
+    public class AlertViewDelegate: NSObject, UIAlertViewDelegate {
 
         var clicked:((alertView:UIAlertView,buttonIndex:Int)->Void)?
         var willPresent:((alertView:UIAlertView)->Void)?
@@ -685,13 +686,14 @@ public class Curly : NSObject {
                 super.init()
         }
 
-        private func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+        public func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+           
             if clicked != nil {
                 clicked!(alertView: alertView,buttonIndex: buttonIndex)
             }
         }
 
-        private func alertViewCancel(alertView: UIAlertView) {
+        public func alertViewCancel(alertView: UIAlertView) {
             if canceled == nil {
                 alertView.dismissWithClickedButtonIndex(alertView.cancelButtonIndex, animated: false)
             }else{
@@ -699,37 +701,45 @@ public class Curly : NSObject {
             }
         }
 
-        private func willPresentAlertView(alertView: UIAlertView) {
+        public func willPresentAlertView(alertView: UIAlertView) {
             if willPresent != nil {
                 willPresent!(alertView: alertView)
             }
         }
 
-        private func didPresentAlertView(alertView: UIAlertView) {
+        public func didPresentAlertView(alertView: UIAlertView) {
             if didPresent != nil {
                 didPresent!(alertView: alertView)
             }
         }
 
-        private func alertView(alertView: UIAlertView, willDismissWithButtonIndex buttonIndex: Int) {
+        public func alertView(alertView: UIAlertView, willDismissWithButtonIndex buttonIndex: Int) {
+            
+            
             if willDismiss != nil {
                 willDismiss!(alertView: alertView, buttonIndex: buttonIndex)
             }
         }
 
-        private func alertView(alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int) {
+        public func alertView(alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int) {
+            
+            
             if didDismiss != nil {
                 didDismiss!(alertView: alertView, buttonIndex: buttonIndex)
             }
         }
         
-        private func alertViewShouldEnableFirstOtherButton(alertView: UIAlertView) -> Bool {
+        public func alertViewShouldEnableFirstOtherButton(alertView: UIAlertView) -> Bool {
             //println("should enable???")
             if shouldEnableFirstOtherButton == nil {
                 return true
             }else{
                 return shouldEnableFirstOtherButton!(alertView: alertView)
             }
+        }
+        
+        deinit {
+            
         }
     }
     
