@@ -912,6 +912,16 @@ public class Curly : NSObject {
         
     }
     
+    public class func mergeClosures(closures:[()->Void]) -> (()->Void) {
+        
+        return {
+            for c in closures {
+                c()
+            }
+        }
+        
+    }
+    
     public class func mergeClosures<A>(closureA:A->Void, _ closureB:()->Void) -> (A->Void) {
         
         return {
