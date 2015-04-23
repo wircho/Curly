@@ -874,7 +874,7 @@ public class Curly : NSObject {
     //MARK: Merge callbacks
     //TODO: Document this
     
-    public class func splitClosures<A,B>(closure:(A,B)->Void) -> (A->Void,B->Void) {
+    public class func splitClosure<A,B>(closure:(A,B)->Void) -> (A->Void,B->Void) {
         
         var savedA:[A] = []
         var savedB:[B] = []
@@ -950,6 +950,36 @@ public class Curly : NSObject {
             closureB(b)
         }
         
+    }
+    
+    public class func splitClosure(count:Int,_ closure:()->Void) -> [()->Void] {
+        var saved:[Int:Bool] = [:]
+        
+        let readyClosure:()->Void = {
+            var done = true
+            for var i=0; i<count; i+=1 {
+                if saved[i] == nil {
+                    done = false
+                    break
+                }
+            }
+            if done {
+                closure()
+            }
+        }
+        
+        var closures:[()->Void] = []
+        for var i=0; i<count; i+=1 {
+            let j = i
+            closures.append{
+                a in
+                saved[j] = true
+                readyClosure()
+            }
+            
+        }
+        
+        return closures
     }
     
     public class func splitClosure<A>(count:Int,_ closure:[A]->Void) -> [A->Void] {
