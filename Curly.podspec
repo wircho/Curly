@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "Curly"
-  s.version      = "0.0.1"
+  s.version      = "1.0.0"
   s.summary      = "iOS library adding closure (block or callback) functionality to several native classes (alert views, buttons, etc)"
   s.description  = <<-DESC
                     iOS library adding closure (block or callback) functionality to several native classes (alert views, buttons, sliders, storyboard segues, gesture recognizers, etc).
