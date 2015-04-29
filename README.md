@@ -24,6 +24,8 @@ Just add Curly.swift to your project :)
 
 This library is written in **Swift** but it also works in **Objective-C**. If you are using Objective-C, make sure you add `#import "[YourProjectName]-Swift.h"` at the beginning of your Objective-C file. You may need to compile once for the Swift methods to be recognized by Xcode's Objective-C editor.
 
+(Unfortunately you will not be able to install Curly as a pod, since CocoaPods's trunk command does not support this yet. The podspec file is there just waiting for this to become possible. If anyone wishes to help me submit it in a more manual way, please let me know. Thanks to [retsohuang](http://github.com/retsohuang/) for creating the origin podspec file).
+
 2. Usage
 -----
 
