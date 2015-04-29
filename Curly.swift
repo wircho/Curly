@@ -43,6 +43,14 @@ public extension NSObject {
         objc_setAssociatedObject(self, &CurlyAssociatedRetainedObjectsDelegateHandle, associatedObject, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
     }
     
+    public func releaseAllRetainedObjects() {
+        var associatedObject = (objc_getAssociatedObject(self, &CurlyAssociatedRetainedObjectsDelegateHandle) as? NSDictionary) ?? NSDictionary()
+        var mutableAssociatedObject = associatedObject.mutableCopy() as! NSMutableDictionary
+        mutableAssociatedObject.removeAllObjects()
+        associatedObject = mutableAssociatedObject.copy() as! NSDictionary
+        objc_setAssociatedObject(self, &CurlyAssociatedRetainedObjectsDelegateHandle, associatedObject, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+    }
+    
     public func retainedObjectWithKey(key:String) -> AnyObject? {
         var associatedObject:[String:AnyObject] = (objc_getAssociatedObject(self, &CurlyAssociatedRetainedObjectsDelegateHandle) as? [String:AnyObject]) ?? [:]
         return associatedObject[key]
