@@ -416,6 +416,7 @@ public extension NSURLConnection {
 
 public class Curly : NSObject {
     
+    
     //MARK: NSURLConnection
     
     //TODO: Document this
@@ -516,6 +517,46 @@ public class Curly : NSObject {
     class func stopDelay(key:String) {
         Delay.delayKeys[key] = nil
     }
+    
+    //MARK: Do on next frame
+    
+    //TODO: Document this
+    
+    public class DisplayLinkDelegate: NSObject {
+        var nextFrameAction:(()->Void)! = nil
+        
+        public func didNextFrame() {
+            nextFrameAction()
+        }
+        
+    }
+    
+    public class func nextFrame(closure:()->Void) {
+        
+        var delegate = DisplayLinkDelegate()
+        
+        var strongDelegate:DisplayLinkDelegate? = delegate
+        weak var weakDelegate = delegate
+        
+        let displayLink = CADisplayLink(target: delegate, selector: "didNextFrame")
+        
+        delegate.nextFrameAction = {
+            ()->Void in
+            
+            if let delegate = weakDelegate {
+                
+                displayLink.invalidate()
+                
+                closure()
+                
+                strongDelegate = nil
+            }
+        }
+        
+        displayLink.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: NSRunLoopCommonModes)
+        
+    }
+    
     
     //MARK: UIViewController, UIStoryboardSegue
 
