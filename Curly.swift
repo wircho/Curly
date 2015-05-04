@@ -523,37 +523,45 @@ public class Curly : NSObject {
     //TODO: Document this
     
     public class DisplayLinkDelegate: NSObject {
-        var nextFrameAction:(()->Void)! = nil
+        var nextFrameActions:[()->Void] = []
+        
+        var displayLink:CADisplayLink! = nil
+        
+        func activateDisplayLink() {
+            if self.displayLink == nil {
+                self.displayLink = CADisplayLink(target: self, selector: "didNextFrame")
+                self.displayLink.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: NSRunLoopCommonModes)
+            }
+            
+        }
         
         public func didNextFrame() {
-            nextFrameAction()
+            //println("DID NEXT FRAME WITH \(nextFrameActions.count)")
+            
+            let nextActions = nextFrameActions
+            
+            nextFrameActions = []
+            
+            for action in nextActions {
+                action()
+            }
+            
+            
         }
         
     }
     
+    struct DisplayLinkStruct {
+        static var delegate = DisplayLinkDelegate()
+    }
+    
     public class func nextFrame(closure:()->Void) {
         
-        var delegate = DisplayLinkDelegate()
+        var delegate = DisplayLinkStruct.delegate
         
-        var strongDelegate:DisplayLinkDelegate? = delegate
-        weak var weakDelegate = delegate
+        delegate.activateDisplayLink()
         
-        let displayLink = CADisplayLink(target: delegate, selector: "didNextFrame")
-        
-        delegate.nextFrameAction = {
-            ()->Void in
-            
-            if let delegate = weakDelegate {
-                
-                displayLink.invalidate()
-                
-                closure()
-                
-                strongDelegate = nil
-            }
-        }
-        
-        displayLink.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: NSRunLoopCommonModes)
+        delegate.nextFrameActions.append(closure)
         
     }
     
