@@ -28,19 +28,19 @@ public extension NSObject {
     
     public func retainObject(object:AnyObject,withKey key:String) {
         var associatedObject = (objc_getAssociatedObject(self, &CurlyAssociatedRetainedObjectsDelegateHandle) as? NSDictionary) ?? NSDictionary()
-        var mutableAssociatedObject = associatedObject.mutableCopy() as! NSMutableDictionary
+        let mutableAssociatedObject = associatedObject.mutableCopy() as! NSMutableDictionary
         mutableAssociatedObject[key] = object
         associatedObject = mutableAssociatedObject.copy() as! NSDictionary
-        objc_setAssociatedObject(self, &CurlyAssociatedRetainedObjectsDelegateHandle, associatedObject, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+        objc_setAssociatedObject(self, &CurlyAssociatedRetainedObjectsDelegateHandle, associatedObject, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         
     }
     
     public func releaseObjectWithKey(key:String) {
         var associatedObject = (objc_getAssociatedObject(self, &CurlyAssociatedRetainedObjectsDelegateHandle) as? NSDictionary) ?? NSDictionary()
-        var mutableAssociatedObject = associatedObject.mutableCopy() as! NSMutableDictionary
+        let mutableAssociatedObject = associatedObject.mutableCopy() as! NSMutableDictionary
         mutableAssociatedObject.removeObjectForKey(key)
         associatedObject = mutableAssociatedObject.copy() as! NSDictionary
-        objc_setAssociatedObject(self, &CurlyAssociatedRetainedObjectsDelegateHandle, associatedObject, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+        objc_setAssociatedObject(self, &CurlyAssociatedRetainedObjectsDelegateHandle, associatedObject, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
     
     public func retainedObjectWithKey(key:String) -> AnyObject? {
@@ -52,19 +52,19 @@ public extension NSObject {
 
 
 public extension UIAlertView {
-    public func show(#clicked:(alertView:UIAlertView,buttonIndex:Int)->Void) {
+    public func show(clicked clicked:(alertView:UIAlertView,buttonIndex:Int)->Void) {
         self.show(clicked:clicked,willPresent:nil, didPresent: nil, willDismiss: nil, didDismiss: nil, canceled: nil, shouldEnableFirstOtherButton: nil)
     }
 
-    public func show(#willDismiss:(alertView:UIAlertView,buttonIndex:Int)->Void) {
+    public func show(willDismiss willDismiss:(alertView:UIAlertView,buttonIndex:Int)->Void) {
         self.show(clicked:nil,willPresent:nil, didPresent: nil, willDismiss:willDismiss, didDismiss: nil, canceled: nil, shouldEnableFirstOtherButton: nil)
     }
 
-    public func show(#didDismiss:(alertView:UIAlertView,buttonIndex:Int)->Void) {
+    public func show(didDismiss didDismiss:(alertView:UIAlertView,buttonIndex:Int)->Void) {
         self.show(clicked:nil,willPresent:nil, didPresent: nil, willDismiss: nil, didDismiss: didDismiss, canceled: nil, shouldEnableFirstOtherButton: nil)
     }
 
-    public func show(#clicked:((alertView:UIAlertView,buttonIndex:Int)->Void)?,
+    public func show(clicked clicked:((alertView:UIAlertView,buttonIndex:Int)->Void)?,
         willPresent:((alertView:UIAlertView)->Void)?,
         didPresent:((alertView:UIAlertView)->Void)?,
         willDismiss:((alertView:UIAlertView,buttonIndex:Int)->Void)?,
@@ -76,7 +76,7 @@ public extension UIAlertView {
 
             self.delegate = delegate
             
-            objc_setAssociatedObject(self, &CurlyAssociatedDelegateHandle, delegate, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+            objc_setAssociatedObject(self, &CurlyAssociatedDelegateHandle, delegate, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             
             self.show()
 
@@ -84,13 +84,13 @@ public extension UIAlertView {
 }
 
 public extension UINavigationController {
-    public func setDelegate(#willShow:((viewController:UIViewController,animated:Bool)->Void)?, didShow:((viewController:UIViewController,animated:Bool)->Void)? = nil) {
+    public func setDelegate(willShow willShow:((viewController:UIViewController,animated:Bool)->Void)?, didShow:((viewController:UIViewController,animated:Bool)->Void)? = nil) {
         
         let delegate = Curly.NavigationControllerDelegate(willShow: willShow, didShow: didShow)
         
         self.delegate = delegate
         
-        objc_setAssociatedObject(self, &CurlyAssociatedDelegateHandle, delegate, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+        objc_setAssociatedObject(self, &CurlyAssociatedDelegateHandle, delegate, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         
     }
 }
@@ -98,24 +98,24 @@ public extension UINavigationController {
 public extension UIScrollView {
     
     public func setDelegate(
-        #didScroll:((scrollView: UIScrollView) -> Void)?) {
+        didScroll didScroll:((scrollView: UIScrollView) -> Void)?) {
             
             let delegate = Curly.ScrollViewDelegate(willBeginDragging:nil,didScroll:didScroll,willEndDragging:nil,didEndDragging:nil,willBeginDecelerating:nil,didEndDecelerating:nil,didEndScrollingAnimation:nil,shouldScrollToTop:nil,didScrollToTop:nil,willBeginZooming:nil,didZoom:nil,didEndZooming:nil,viewForZooming:nil)
             
             self.delegate = delegate
             
-            objc_setAssociatedObject(self, &CurlyAssociatedDelegateHandle, delegate, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+            objc_setAssociatedObject(self, &CurlyAssociatedDelegateHandle, delegate, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             
     }
     
     public func setDelegate(
-        #willBeginDragging:((scrollView: UIScrollView) -> Void)?,didScroll:((scrollView: UIScrollView) -> Void)?,willEndDragging:((scrollView: UIScrollView, withVelocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) -> Void)?,didEndDragging:((scrollView: UIScrollView, willDecelerate: Bool) -> Void)?,willBeginDecelerating:((scrollView: UIScrollView) -> Void)?,didEndDecelerating:((scrollView: UIScrollView) -> Void)?,didEndScrollingAnimation:((scrollView: UIScrollView) -> Void)?,shouldScrollToTop:((scrollView: UIScrollView) -> Bool)?,didScrollToTop:((scrollView: UIScrollView) -> Void)?,willBeginZooming:((scrollView: UIScrollView, withView: UIView!) -> Void)?,didZoom:((scrollView: UIScrollView) -> Void)?,didEndZooming:((scrollView: UIScrollView, withView: UIView!, atScale: CGFloat) -> Void)?,viewForZooming:((scrollView:UIScrollView)->UIView?)?) {
+        willBeginDragging willBeginDragging:((scrollView: UIScrollView) -> Void)?,didScroll:((scrollView: UIScrollView) -> Void)?,willEndDragging:((scrollView: UIScrollView, withVelocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) -> Void)?,didEndDragging:((scrollView: UIScrollView, willDecelerate: Bool) -> Void)?,willBeginDecelerating:((scrollView: UIScrollView) -> Void)?,didEndDecelerating:((scrollView: UIScrollView) -> Void)?,didEndScrollingAnimation:((scrollView: UIScrollView) -> Void)?,shouldScrollToTop:((scrollView: UIScrollView) -> Bool)?,didScrollToTop:((scrollView: UIScrollView) -> Void)?,willBeginZooming:((scrollView: UIScrollView, withView: UIView!) -> Void)?,didZoom:((scrollView: UIScrollView) -> Void)?,didEndZooming:((scrollView: UIScrollView, withView: UIView!, atScale: CGFloat) -> Void)?,viewForZooming:((scrollView:UIScrollView)->UIView?)?) {
         
         let delegate = Curly.ScrollViewDelegate(willBeginDragging:willBeginDragging,didScroll:didScroll,willEndDragging:willEndDragging,didEndDragging:didEndDragging,willBeginDecelerating:willBeginDecelerating,didEndDecelerating:didEndDecelerating,didEndScrollingAnimation:didEndScrollingAnimation,shouldScrollToTop:shouldScrollToTop,didScrollToTop:didScrollToTop,willBeginZooming:willBeginZooming,didZoom:didZoom,didEndZooming:didEndZooming,viewForZooming:viewForZooming)
         
         self.delegate = delegate
         
-        objc_setAssociatedObject(self, &CurlyAssociatedDelegateHandle, delegate, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+        objc_setAssociatedObject(self, &CurlyAssociatedDelegateHandle, delegate, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         
     }
 }
@@ -164,7 +164,7 @@ public extension UIGestureRecognizer {
         self.init(target: delegate, action: "recognizedGestureRecognizer:")
         
         
-        objc_setAssociatedObject(self, &CurlyAssociatedDelegateHandle, delegate, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+        objc_setAssociatedObject(self, &CurlyAssociatedDelegateHandle, delegate, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
 }
 
@@ -175,7 +175,7 @@ public extension UIBarButtonItem {
         
         self.init(barButtonSystemItem: barButtonSystemItem, target:delegate, action:"tappedButtonItem")
         
-        objc_setAssociatedObject(self, &CurlyAssociatedDelegateHandle, delegate, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+        objc_setAssociatedObject(self, &CurlyAssociatedDelegateHandle, delegate, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
     
     convenience init(image: UIImage?, landscapeImagePhone: UIImage?, style: UIBarButtonItemStyle, closure:()->Void) {
@@ -184,7 +184,7 @@ public extension UIBarButtonItem {
         
         self.init(image: image, landscapeImagePhone: landscapeImagePhone, style: style, target:delegate, action:"tappedButtonItem")
         
-        objc_setAssociatedObject(self, &CurlyAssociatedDelegateHandle, delegate, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+        objc_setAssociatedObject(self, &CurlyAssociatedDelegateHandle, delegate, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         
     }
     
@@ -194,7 +194,7 @@ public extension UIBarButtonItem {
         
         self.init(image: image, style: style, target:delegate, action:"tappedButtonItem")
         
-        objc_setAssociatedObject(self, &CurlyAssociatedDelegateHandle, delegate, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+        objc_setAssociatedObject(self, &CurlyAssociatedDelegateHandle, delegate, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         
     }
     
@@ -204,7 +204,7 @@ public extension UIBarButtonItem {
         
         self.init(title: title, style: style, target:delegate, action:"tappedButtonItem")
         
-        objc_setAssociatedObject(self, &CurlyAssociatedDelegateHandle, delegate, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+        objc_setAssociatedObject(self, &CurlyAssociatedDelegateHandle, delegate, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         
     }
 }
@@ -235,7 +235,7 @@ public extension UIControl {
 
         delegateDictionary[events.rawValue]!.append(delegate)
 
-        objc_setAssociatedObject(self, &CurlyAssociatedDelegateDictionaryHandle, delegateDictionary, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+        objc_setAssociatedObject(self, &CurlyAssociatedDelegateDictionaryHandle, delegateDictionary, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
 
     }
 
@@ -255,7 +255,7 @@ public extension UIControl {
         
         delegateDictionary[events.rawValue] = nil
 
-        objc_setAssociatedObject(self, &CurlyAssociatedDelegateDictionaryHandle, delegateDictionary, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+        objc_setAssociatedObject(self, &CurlyAssociatedDelegateDictionaryHandle, delegateDictionary, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
 
     }
 }
@@ -271,12 +271,12 @@ public extension NSObject {
         
         deinitArray.append(Curly.DeinitDelegate(deinited: closure))
         
-        objc_setAssociatedObject(self, &CurlyAssociatedDeinitDelegateArrayHandle, deinitArray, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+        objc_setAssociatedObject(self, &CurlyAssociatedDeinitDelegateArrayHandle, deinitArray, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         
     }
     
     public func removeDeinitObservers() {
-        var deinitArray = objc_getAssociatedObject(self, &CurlyAssociatedDeinitDelegateArrayHandle) as! [Curly.DeinitDelegate]!
+        let deinitArray = objc_getAssociatedObject(self, &CurlyAssociatedDeinitDelegateArrayHandle) as! [Curly.DeinitDelegate]!
         
         if deinitArray == nil {
             return
@@ -286,7 +286,7 @@ public extension NSObject {
             delegate.deinited = nil
         }
         
-        objc_setAssociatedObject(self, &CurlyAssociatedDeinitDelegateArrayHandle, nil, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+        objc_setAssociatedObject(self, &CurlyAssociatedDeinitDelegateArrayHandle, nil, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
     
 }
@@ -320,7 +320,7 @@ public extension UIView {
         
         let layoutDelegate = Curly.LayoutDelegate(closure:closure)
         
-        objc_setAssociatedObject(self, &CurlyAssociatedLayoutDelegateHandle,layoutDelegate, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+        objc_setAssociatedObject(self, &CurlyAssociatedLayoutDelegateHandle,layoutDelegate, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         
     }
     
@@ -394,7 +394,7 @@ public extension NSURLConnection {
         )
         
         if connection != nil {
-            objc_setAssociatedObject(connection!, &CurlyAssociatedConnectionDelegateHandle,delegate, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+            objc_setAssociatedObject(connection!, &CurlyAssociatedConnectionDelegateHandle,delegate, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
         
         return connection
@@ -420,7 +420,7 @@ public class Curly : NSObject {
             super.init()
         }
         
-        private func connection(connection: NSURLConnection, didFailWithError error: NSError) {
+        @objc private func connection(connection: NSURLConnection, didFailWithError error: NSError) {
             self.error = error
             callDone()
         }
@@ -440,7 +440,7 @@ public class Curly : NSObject {
         
         var doneFlag = false
         
-        private func connection(connection: NSURLConnection, didReceiveData data: NSData) {
+        @objc private func connection(connection: NSURLConnection, didReceiveData data: NSData) {
             if self.data == nil {
                 self.data = NSMutableData(data: data)
             }else {
@@ -448,11 +448,11 @@ public class Curly : NSObject {
             }
         }
         
-        private func connectionDidFinishLoading(connection: NSURLConnection) {
+        @objc private func connectionDidFinishLoading(connection: NSURLConnection) {
             callDone()
         }
         
-        private func connection(connection: NSURLConnection, didReceiveResponse response: NSURLResponse) {
+        @objc private func connection(connection: NSURLConnection, didReceiveResponse response: NSURLResponse) {
             self.response = response
         }
     }
@@ -492,7 +492,7 @@ public class Curly : NSObject {
     
     class func delay(delay:Double,key:String,closure:()->()) {
         Delay.delayCounter += 1
-        var counter = Delay.delayCounter
+        let counter = Delay.delayCounter
         Delay.delayKeys[key] = counter
         
         self.delay(delay) {
@@ -614,13 +614,13 @@ public class Curly : NSObject {
         public func scrollViewDidScrollToTop(scrollView: UIScrollView) {
             didScrollToTop?(scrollView: scrollView)
         }
-        public func scrollViewWillBeginZooming(scrollView: UIScrollView, withView view: UIView!) {
+        public func scrollViewWillBeginZooming(scrollView: UIScrollView, withView view: UIView?) {
             willBeginZooming?(scrollView:scrollView,withView:view)
         }
         public func scrollViewDidZoom(scrollView: UIScrollView) {
             didZoom?(scrollView:scrollView)
         }
-        public func scrollViewDidEndZooming(scrollView: UIScrollView, withView view: UIView!, atScale scale: CGFloat) {
+        public func scrollViewDidEndZooming(scrollView: UIScrollView, withView view: UIView?, atScale scale: CGFloat) {
             didEndZooming?(scrollView:scrollView,withView:view,atScale:scale)
         }
         public func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
@@ -879,7 +879,7 @@ public class Curly : NSObject {
         var savedA:[A] = []
         var savedB:[B] = []
         
-        var readyClosure:()->Void = {
+        let readyClosure:()->Void = {
             
             if savedA.count > 0 && savedB.count > 0 {
                 closure(savedA.first!,savedB.first!)
@@ -887,13 +887,13 @@ public class Curly : NSObject {
             
         }
         
-        var aClosure:A->Void = {
+        let aClosure:A->Void = {
             a in
             savedA = [a]
             readyClosure()
         }
         
-        var bClosure:B->Void = {
+        let bClosure:B->Void = {
             b in
             savedB = [b]
             readyClosure()
