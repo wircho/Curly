@@ -17,7 +17,7 @@ class NavDelegateViewController: UIViewController {
         self.performSegueWithIdentifier("navigation", sender:nil) {
             (segue:UIStoryboardSegue,sender:AnyObject?) in
             
-            let navController = segue.destinationViewController as UINavigationController
+            let navController = segue.destinationViewController as! UINavigationController
             
             //Setting navigation controller delegate with closure
             
@@ -26,7 +26,9 @@ class NavDelegateViewController: UIViewController {
                     [weak navController]
                     (viewController:UIViewController, animated) in
                     
-                    let index = contains(navController!.viewControllers as [UIViewController],viewController)
+                    
+                    
+                    let index = (navController!.viewControllers as [UIViewController]).contains(viewController)
                         ? navController!.viewControllers.count - 1
                         : navController!.viewControllers.count
                     
@@ -38,7 +40,7 @@ class NavDelegateViewController: UIViewController {
                     [weak navController]
                     (viewController:UIViewController, animated) in
                     
-                    let index = contains(navController!.viewControllers as [UIViewController],viewController)
+                    let index = (navController!.viewControllers as [UIViewController]).contains(viewController)
                         ? navController!.viewControllers.count - 1
                         : navController!.viewControllers.count
                     

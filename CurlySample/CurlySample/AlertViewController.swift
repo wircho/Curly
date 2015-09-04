@@ -25,8 +25,8 @@ class AlertViewController: UIViewController {
         
         let alert = UIAlertView(title: (titleField.text == nil || titleField.text == "") ? "Title" : titleField.text, message: (messageField.text == nil || messageField.text == "") ? "Message" : messageField.text, delegate: nil, cancelButtonTitle: nil)
         
-        var buttonTitles = ((buttonsField.text == nil || buttonsField.text == "") ? "OK" : buttonsField.text).componentsSeparatedByString(", ")
-        var cancelTitle = buttonTitles.removeAtIndex(0)
+        var buttonTitles = ((buttonsField.text == nil || buttonsField.text! == "") ? "OK" : buttonsField.text)!.componentsSeparatedByString(", ")
+        let cancelTitle = buttonTitles.removeAtIndex(0)
         buttonTitles.append(cancelTitle)
         
         for title in buttonTitles {

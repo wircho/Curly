@@ -16,12 +16,12 @@ class LayoutViewController: UIViewController,UIGestureRecognizerDelegate {
         //This is just to prevent the "swipe back" gesture on this VC
         //and to restore this setting at the end
         
-        self.navigationController!.interactivePopGestureRecognizer.delegate = self
+        self.navigationController!.interactivePopGestureRecognizer!.delegate = self
         weak var navVC:UINavigationController! = self.navigationController
         
         self.deinited {
             if let nvc = navVC {
-                nvc.interactivePopGestureRecognizer.delegate = nil
+                nvc.interactivePopGestureRecognizer!.delegate = nil
             }
         }
         
@@ -29,13 +29,13 @@ class LayoutViewController: UIViewController,UIGestureRecognizerDelegate {
         
         let redView = UIView(frame: CGRectMake(10,10,self.view.bounds.size.width-20,self.view.bounds.size.height-20))
         redView.backgroundColor = UIColor.redColor()
-        redView.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+        redView.autoresizingMask = [.FlexibleWidth , .FlexibleHeight]
         
         let blueView = UIView()
         blueView.backgroundColor = UIColor.blueColor()
         
         let label = UILabel(frame:redView.bounds)
-        label.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+        label.autoresizingMask = [.FlexibleWidth , .FlexibleHeight]
         label.font = UIFont(name: "HelveticaNeue-Regular", size: 20)
         label.textColor = UIColor.whiteColor()
         label.textAlignment = .Center
@@ -84,7 +84,7 @@ class LayoutViewController: UIViewController,UIGestureRecognizerDelegate {
                 switch gr.state {
                 case .Began:
                     initialRect = rv.frame
-                    var point = gr.locationInView(rv)
+                    let point = gr.locationInView(rv)
                     
                     let width3 = rv.bounds.size.width/CGFloat(3)
                     let height3 = rv.bounds.size.height/CGFloat(3)
@@ -103,7 +103,7 @@ class LayoutViewController: UIViewController,UIGestureRecognizerDelegate {
                     
                 case .Changed:
                     
-                    var trans = gr.translationInView(rv.superview!)
+                    let trans = gr.translationInView(rv.superview!)
                     var rect = initialRect
                     
                     switch initialCorner {
