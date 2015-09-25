@@ -288,41 +288,41 @@ public extension NSObject {
     
 }
 
-var CurlyAlreadyReplaceLayoutSubviewsMethod = false
+//var CurlyAlreadyReplaceLayoutSubviewsMethod = false
 
-public extension UIView {
-    
-    public func _layoutSubviews() {
-        
-        let layoutDelegate = objc_getAssociatedObject(self,&CurlyAssociatedLayoutDelegateHandle) as! Curly.LayoutDelegate?
-        
-        layoutDelegate?.layout(self)
-        
-        self._layoutSubviews()
-        
-    }
-    
-    public func layout<T:UIView>(closure:(T)->Void) {
-        
-        if !CurlyAlreadyReplaceLayoutSubviewsMethod {
-            
-            method_exchangeImplementations(
-                class_getInstanceMethod(UIView.self,"layoutSubviews"),
-                class_getInstanceMethod(UIView.self,"_layoutSubviews")
-            )
-            
-            CurlyAlreadyReplaceLayoutSubviewsMethod = true
-            
-        }
-        
-        let layoutDelegate = Curly.LayoutDelegate(closure:closure)
-        
-        objc_setAssociatedObject(self, &CurlyAssociatedLayoutDelegateHandle,layoutDelegate, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        
-    }
-    
-    
-}
+//public extension UIView {
+//    
+//    public func _layoutSubviews() {
+//        
+//        let layoutDelegate = objc_getAssociatedObject(self,&CurlyAssociatedLayoutDelegateHandle) as! Curly.LayoutDelegate?
+//        
+//        layoutDelegate?.layout(self)
+//        
+//        self._layoutSubviews()
+//        
+//    }
+//    
+//    public func layout<T:UIView>(closure:(T)->Void) {
+//        
+//        if !CurlyAlreadyReplaceLayoutSubviewsMethod {
+//            
+//            method_exchangeImplementations(
+//                class_getInstanceMethod(UIView.self,"layoutSubviews"),
+//                class_getInstanceMethod(UIView.self,"_layoutSubviews")
+//            )
+//            
+//            CurlyAlreadyReplaceLayoutSubviewsMethod = true
+//            
+//        }
+//        
+//        let layoutDelegate = Curly.LayoutDelegate(closure:closure)
+//        
+//        objc_setAssociatedObject(self, &CurlyAssociatedLayoutDelegateHandle,layoutDelegate, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+//        
+//    }
+//    
+//    
+//}
 
 //TODO: Document this
 
@@ -747,20 +747,20 @@ public class Curly : NSObject {
     
     //MARK: UIView layout delegate
     
-    public class LayoutDelegate: NSObject {
-        public let closure:(UIView)->Void
-        
-        func layout(v:UIView) {
-            closure(v)
-        }
-        
-        init<T:UIView>(closure:(T)->Void) {
-            self.closure = {
-                closure($0 as! T)
-            }
-            super.init()
-        }
-    }
+//    public class LayoutDelegate: NSObject {
+//        public let closure:(UIView)->Void
+//        
+//        func layout(v:UIView) {
+//            closure(v)
+//        }
+//        
+//        init<T:UIView>(closure:(T)->Void) {
+//            self.closure = {
+//                closure($0 as! T)
+//            }
+//            super.init()
+//        }
+//    }
     
     //MARK: Deinit delegate
     
