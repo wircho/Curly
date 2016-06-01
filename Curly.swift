@@ -44,7 +44,7 @@ public class CurlyNotificationToken {
 //MARK: Extensions
 
 public extension String {
-    func listenFrom<T:AnyObject>(listener:T,object:AnyObject? = nil,closure:(T,NSNotification)->Void) -> CurlyNotificationToken {
+    func observeFrom<T:AnyObject>(listener:T,object:AnyObject? = nil,closure:(T,NSNotification)->Void) -> CurlyNotificationToken {
         var token:CurlyNotificationToken? = nil
         let observer = NSNotificationCenter.defaultCenter().addObserverForName(self, object: object, queue: nil) {
             note in
