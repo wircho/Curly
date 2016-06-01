@@ -26,18 +26,8 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="57d-hq-hiA">
-                                <rect key="frame" x="263" y="155" width="73" height="30"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                <state key="normal" title="Alert views">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="Nc0-eG-Kdf" kind="show" id="UHi-zw-3zU"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ml3-rx-Fhh">
-                                <rect key="frame" x="235" y="235" width="130" height="30"/>
+                                <rect key="frame" x="235" y="195" width="130" height="30"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="Buttons and sliders">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -47,7 +37,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UBE-o7-HUj">
-                                <rect key="frame" x="219" y="275" width="162" height="30"/>
+                                <rect key="frame" x="219" y="235" width="162" height="30"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="Deinit (dealloc) observer">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -57,7 +47,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5gs-Vz-H2G">
-                                <rect key="frame" x="200" y="315" width="201" height="30"/>
+                                <rect key="frame" x="200" y="275" width="201" height="30"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="Navigation controller delegate">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -67,7 +57,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jns-Vn-eCg">
-                                <rect key="frame" x="232" y="355" width="135" height="30"/>
+                                <rect key="frame" x="232" y="315" width="135" height="30"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="Scroll view delegate">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -76,8 +66,18 @@
                                     <segue destination="7b7-9H-kid" kind="show" id="hSw-XL-DUE"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nI2-Bz-Be8">
+                                <rect key="frame" x="258" y="355" width="84" height="30"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="Notifications">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="Lui-aG-b9Q" kind="show" id="orZ-ab-x89"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OeH-PL-0mU">
-                                <rect key="frame" x="232" y="195" width="135" height="30"/>
+                                <rect key="frame" x="232" y="155" width="135" height="30"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="Gesture recognizers">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -90,10 +90,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Jns-Vn-eCg" firstAttribute="top" secondItem="5gs-Vz-H2G" secondAttribute="bottom" constant="10" id="0TZ-7f-7nY"/>
-                            <constraint firstItem="OeH-PL-0mU" firstAttribute="top" secondItem="57d-hq-hiA" secondAttribute="bottom" constant="10" id="2qD-Px-6p0"/>
-                            <constraint firstItem="57d-hq-hiA" firstAttribute="top" secondItem="xwy-63-IEV" secondAttribute="bottom" constant="20" id="7n2-v9-BVO"/>
-                            <constraint firstAttribute="centerX" secondItem="57d-hq-hiA" secondAttribute="centerX" id="Hm6-zb-HQA"/>
                             <constraint firstItem="xwy-63-IEV" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="30" id="Joi-D6-2mx"/>
+                            <constraint firstItem="nI2-Bz-Be8" firstAttribute="top" secondItem="Jns-Vn-eCg" secondAttribute="bottom" constant="10" id="RIW-oa-7cx"/>
                             <constraint firstAttribute="centerX" secondItem="xwy-63-IEV" secondAttribute="centerX" id="RLV-HL-CYm"/>
                             <constraint firstAttribute="centerX" secondItem="UBE-o7-HUj" secondAttribute="centerX" id="ck4-vj-8ek"/>
                             <constraint firstItem="5gs-Vz-H2G" firstAttribute="top" secondItem="UBE-o7-HUj" secondAttribute="bottom" constant="10" id="dcm-Uf-WPR"/>
@@ -101,7 +99,9 @@
                             <constraint firstItem="Ml3-rx-Fhh" firstAttribute="top" secondItem="OeH-PL-0mU" secondAttribute="bottom" constant="10" id="jsE-Ri-Hua"/>
                             <constraint firstAttribute="centerX" secondItem="Ml3-rx-Fhh" secondAttribute="centerX" id="kvf-08-P0o"/>
                             <constraint firstItem="UBE-o7-HUj" firstAttribute="top" secondItem="Ml3-rx-Fhh" secondAttribute="bottom" constant="10" id="teW-Eu-Jar"/>
+                            <constraint firstItem="nI2-Bz-Be8" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vrU-eY-M5r"/>
                             <constraint firstAttribute="centerX" secondItem="OeH-PL-0mU" secondAttribute="centerX" id="x6O-Qr-6vx"/>
+                            <constraint firstItem="OeH-PL-0mU" firstAttribute="top" secondItem="xwy-63-IEV" secondAttribute="bottom" constant="20" id="xNY-Cx-DCc"/>
                             <constraint firstAttribute="centerX" secondItem="Jns-Vn-eCg" secondAttribute="centerX" id="znh-lL-q3M"/>
                         </constraints>
                     </view>
@@ -109,6 +109,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="201" y="404"/>
         </scene>
         <!--Gesture Recognizers-->
         <scene sceneID="xqg-aB-Ihp">
@@ -396,7 +397,65 @@ Ut strip steak drumstick labore. Ut labore ad sed cow pork belly sint kevin ex e
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kNe-cu-fCo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="980" y="3618"/>
+            <point key="canvasLocation" x="1040" y="3618"/>
+        </scene>
+        <!--Notifications-->
+        <scene sceneID="X5Q-Bc-ugX">
+            <objects>
+                <viewController id="Lui-aG-b9Q" customClass="NotificationsViewController" customModule="CurlySample" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vTR-nB-01k"/>
+                        <viewControllerLayoutGuide type="bottom" id="fPt-s3-C4D"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Dds-Qp-AIM">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap the button to fire a notification" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4pg-Uk-LI2">
+                                <rect key="frame" x="200" y="94" width="200" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="bcg-gs-LKh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Nmn-LH-A1f">
+                                <rect key="frame" x="258.5" y="155" width="83" height="36"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CRG-qJ-1kg">
+                                        <rect key="frame" x="0.0" y="0.0" width="83" height="36"/>
+                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="83" id="9Vf-TT-eEQ"/>
+                                            <constraint firstAttribute="height" constant="36" id="EFG-m6-kK1"/>
+                                        </constraints>
+                                        <state key="normal" title="Fire">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="tappedFire:" destination="Lui-aG-b9Q" eventType="touchUpInside" id="Tqw-ho-pXF"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="4pg-Uk-LI2" firstAttribute="centerX" secondItem="Dds-Qp-AIM" secondAttribute="centerX" id="Fkw-oi-0DZ"/>
+                            <constraint firstItem="4pg-Uk-LI2" firstAttribute="top" secondItem="vTR-nB-01k" secondAttribute="bottom" constant="30" id="KlI-hY-9ka"/>
+                            <constraint firstItem="Nmn-LH-A1f" firstAttribute="centerX" secondItem="Dds-Qp-AIM" secondAttribute="centerX" id="V0J-8s-wgH"/>
+                            <constraint firstItem="Nmn-LH-A1f" firstAttribute="top" secondItem="4pg-Uk-LI2" secondAttribute="bottom" constant="20" id="mxi-eN-oBW"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Notifications" id="pak-UX-MjR"/>
+                    <connections>
+                        <outlet property="label" destination="4pg-Uk-LI2" id="fZD-cJ-GEd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E6p-uJ-nis" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1187" y="4478"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="4yk-JH-F6a">
@@ -478,88 +537,6 @@ Ut strip steak drumstick labore. Ut labore ad sed cow pork belly sint kevin ex e
             </objects>
             <point key="canvasLocation" x="1984" y="2690"/>
         </scene>
-        <!--Alert Views-->
-        <scene sceneID="OTO-fg-KGX">
-            <objects>
-                <viewController id="Nc0-eG-Kdf" customClass="AlertViewController" customModule="CurlySample" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="g2z-lu-E6n"/>
-                        <viewControllerLayoutGuide type="bottom" id="2y9-gA-TU9"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="bql-6i-8Ip">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bw9-80-bKX">
-                                <rect key="frame" x="160" y="94" width="280" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="280" id="lat-9k-5en"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Message" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iJZ-81-mgt">
-                                <rect key="frame" x="160" y="144" width="280" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="280" id="byS-IK-clS"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Cancel title, Other button title, One more" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aW0-CH-44p">
-                                <rect key="frame" x="160" y="194" width="280" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="280" id="324-5X-S6z"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VRW-Vw-Zsf">
-                                <rect key="frame" x="245" y="244" width="109" height="30"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                <state key="normal" title="Show Alert View">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="tappedShowButton:" destination="Nc0-eG-Kdf" eventType="touchUpInside" id="C5Q-Vm-R8F"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WX1-yr-Mhf">
-                                <rect key="frame" x="160" y="304" width="280" height="20.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="280" id="y2Y-0d-omu"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="aW0-CH-44p" firstAttribute="top" secondItem="iJZ-81-mgt" secondAttribute="bottom" constant="20" id="1Wb-wI-MUd"/>
-                            <constraint firstItem="VRW-Vw-Zsf" firstAttribute="top" secondItem="aW0-CH-44p" secondAttribute="bottom" constant="20" id="KqI-Vg-4f4"/>
-                            <constraint firstAttribute="centerX" secondItem="Bw9-80-bKX" secondAttribute="centerX" id="Kyc-Sf-neq"/>
-                            <constraint firstItem="Bw9-80-bKX" firstAttribute="top" secondItem="g2z-lu-E6n" secondAttribute="bottom" constant="30" id="R9g-Ye-3eD"/>
-                            <constraint firstAttribute="centerX" secondItem="VRW-Vw-Zsf" secondAttribute="centerX" id="XXH-3G-Kf8"/>
-                            <constraint firstAttribute="centerX" secondItem="WX1-yr-Mhf" secondAttribute="centerX" id="YLg-ho-seg"/>
-                            <constraint firstAttribute="centerX" secondItem="iJZ-81-mgt" secondAttribute="centerX" id="dPL-HP-dRn"/>
-                            <constraint firstItem="WX1-yr-Mhf" firstAttribute="top" secondItem="VRW-Vw-Zsf" secondAttribute="bottom" constant="30" id="eFk-Dc-OeV"/>
-                            <constraint firstAttribute="centerX" secondItem="aW0-CH-44p" secondAttribute="centerX" id="gvJ-jy-Kda"/>
-                            <constraint firstItem="iJZ-81-mgt" firstAttribute="top" secondItem="Bw9-80-bKX" secondAttribute="bottom" constant="20" id="i3G-FK-9PE"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Alert Views" id="fwd-8w-Npo"/>
-                    <connections>
-                        <outlet property="buttonsField" destination="aW0-CH-44p" id="mFg-zP-vQA"/>
-                        <outlet property="messageField" destination="iJZ-81-mgt" id="4jI-yR-wSC"/>
-                        <outlet property="resultLabel" destination="WX1-yr-Mhf" id="Tgg-NQ-Ltz"/>
-                        <outlet property="titleField" destination="Bw9-80-bKX" id="oGT-2k-bDb"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9XA-QP-FBY" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="956" y="-1184"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="KVp-hC-bTm">
             <objects>
@@ -574,7 +551,7 @@ Ut strip steak drumstick labore. Ut labore ad sed cow pork belly sint kevin ex e
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vvS-xG-dHF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-544" y="306"/>
+            <point key="canvasLocation" x="-640" y="386"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="h28-u4-Vkb">
