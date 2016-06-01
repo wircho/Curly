@@ -19,7 +19,11 @@ Contents
 1. Installation
 ------------
 
-Just add Curly.swift to your project :)
+Just add Curly.swift to your project, or use [CocoaPods](https://cocoapods.org):
+
+```
+pod "Curly", :git => 'https://github.com/wircho/Curly.git', :branch => 'master'
+```
 
 This library is written in **Swift** but it also works in **Objective-C**. If you are using Objective-C, make sure you add `#import "[YourProjectName]-Swift.h"` at the beginning of your Objective-C file. You may need to compile once for the Swift methods to be recognized by Xcode's Objective-C editor.
 
