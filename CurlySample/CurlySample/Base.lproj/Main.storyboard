@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A386b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Bql-g0-A6c">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Bql-g0-A6c">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
         <!--Curly-->
@@ -36,28 +36,8 @@
                                     <segue destination="Nc0-eG-Kdf" kind="show" id="UHi-zw-3zU"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wr4-9w-AQb">
-                                <rect key="frame" x="236" y="195" width="127" height="30"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                <state key="normal" title="Storyboard segues">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="Ec6-zJ-x6Q" kind="show" id="lSA-cB-WRH"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OeH-PL-0mU">
-                                <rect key="frame" x="232" y="235" width="135" height="30"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                <state key="normal" title="Gesture recognizers">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="3L1-WI-cqr" kind="show" id="guS-Vb-AhM"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ml3-rx-Fhh">
-                                <rect key="frame" x="235" y="275" width="130" height="30"/>
+                                <rect key="frame" x="235" y="235" width="130" height="30"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="Buttons and sliders">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -67,7 +47,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UBE-o7-HUj">
-                                <rect key="frame" x="219" y="315" width="162" height="30"/>
+                                <rect key="frame" x="219" y="275" width="162" height="30"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="Deinit (dealloc) observer">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -77,7 +57,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5gs-Vz-H2G">
-                                <rect key="frame" x="200" y="355" width="201" height="30"/>
+                                <rect key="frame" x="200" y="315" width="201" height="30"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="Navigation controller delegate">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -87,7 +67,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jns-Vn-eCg">
-                                <rect key="frame" x="232" y="395" width="135" height="30"/>
+                                <rect key="frame" x="232" y="355" width="135" height="30"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="Scroll view delegate">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -96,34 +76,30 @@
                                     <segue destination="7b7-9H-kid" kind="show" id="hSw-XL-DUE"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GOO-vR-VRf">
-                                <rect key="frame" x="243.5" y="435" width="113" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OeH-PL-0mU">
+                                <rect key="frame" x="232" y="195" width="135" height="30"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                <state key="normal" title="Layout subviews">
+                                <state key="normal" title="Gesture recognizers">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="KOI-Wj-wpN" kind="show" id="Fzm-CL-c2a"/>
+                                    <segue destination="3L1-WI-cqr" kind="show" id="guS-Vb-AhM"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Jns-Vn-eCg" firstAttribute="top" secondItem="5gs-Vz-H2G" secondAttribute="bottom" constant="10" id="0TZ-7f-7nY"/>
+                            <constraint firstItem="OeH-PL-0mU" firstAttribute="top" secondItem="57d-hq-hiA" secondAttribute="bottom" constant="10" id="2qD-Px-6p0"/>
                             <constraint firstItem="57d-hq-hiA" firstAttribute="top" secondItem="xwy-63-IEV" secondAttribute="bottom" constant="20" id="7n2-v9-BVO"/>
                             <constraint firstAttribute="centerX" secondItem="57d-hq-hiA" secondAttribute="centerX" id="Hm6-zb-HQA"/>
                             <constraint firstItem="xwy-63-IEV" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="30" id="Joi-D6-2mx"/>
-                            <constraint firstItem="GOO-vR-VRf" firstAttribute="top" secondItem="Jns-Vn-eCg" secondAttribute="bottom" constant="10" id="Kzb-uH-9t0"/>
-                            <constraint firstItem="wr4-9w-AQb" firstAttribute="top" secondItem="57d-hq-hiA" secondAttribute="bottom" constant="10" id="NWx-5A-DXg"/>
                             <constraint firstAttribute="centerX" secondItem="xwy-63-IEV" secondAttribute="centerX" id="RLV-HL-CYm"/>
                             <constraint firstAttribute="centerX" secondItem="UBE-o7-HUj" secondAttribute="centerX" id="ck4-vj-8ek"/>
                             <constraint firstItem="5gs-Vz-H2G" firstAttribute="top" secondItem="UBE-o7-HUj" secondAttribute="bottom" constant="10" id="dcm-Uf-WPR"/>
                             <constraint firstAttribute="centerX" secondItem="5gs-Vz-H2G" secondAttribute="centerX" id="fhr-Wv-D96"/>
                             <constraint firstItem="Ml3-rx-Fhh" firstAttribute="top" secondItem="OeH-PL-0mU" secondAttribute="bottom" constant="10" id="jsE-Ri-Hua"/>
                             <constraint firstAttribute="centerX" secondItem="Ml3-rx-Fhh" secondAttribute="centerX" id="kvf-08-P0o"/>
-                            <constraint firstAttribute="centerX" secondItem="wr4-9w-AQb" secondAttribute="centerX" id="n4q-6c-bha"/>
-                            <constraint firstItem="OeH-PL-0mU" firstAttribute="top" secondItem="wr4-9w-AQb" secondAttribute="bottom" constant="10" id="rTa-FP-IvZ"/>
-                            <constraint firstAttribute="centerX" secondItem="GOO-vR-VRf" secondAttribute="centerX" id="tC2-LN-mfq"/>
                             <constraint firstItem="UBE-o7-HUj" firstAttribute="top" secondItem="Ml3-rx-Fhh" secondAttribute="bottom" constant="10" id="teW-Eu-Jar"/>
                             <constraint firstAttribute="centerX" secondItem="OeH-PL-0mU" secondAttribute="centerX" id="x6O-Qr-6vx"/>
                             <constraint firstAttribute="centerX" secondItem="Jns-Vn-eCg" secondAttribute="centerX" id="znh-lL-q3M"/>
@@ -249,7 +225,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0VL-Uv-fP4">
-                                <rect key="frame" x="259" y="155" width="83" height="36"/>
+                                <rect key="frame" x="259" y="215.5" width="83" height="36"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="83" id="0yc-X9-oNV"/>
@@ -262,8 +238,8 @@
                                     <action selector="tappedButton:" destination="uy2-u0-LO4" eventType="touchUpInside" id="8mz-wp-iUm"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap the button to make it disapper and deinit!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lUO-gQ-Cju">
-                                <rect key="frame" x="200" y="94" width="200" height="41"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap the button to make it disappear and deinit! You may need to tap somewhere else on the screen after that." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lUO-gQ-Cju">
+                                <rect key="frame" x="200" y="94" width="200" height="101.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="aBX-TF-CgS"/>
                                 </constraints>
@@ -422,26 +398,6 @@ Ut strip steak drumstick labore. Ut labore ad sed cow pork belly sint kevin ex e
             </objects>
             <point key="canvasLocation" x="980" y="3618"/>
         </scene>
-        <!--Layout Subviews-->
-        <scene sceneID="LO3-u1-c0Y">
-            <objects>
-                <viewController id="KOI-Wj-wpN" customClass="LayoutViewController" customModule="CurlySample" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="C1x-gc-TzI"/>
-                        <viewControllerLayoutGuide type="bottom" id="uZ3-ML-atu"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8hB-i0-VJo">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" title="Layout Subviews" id="RiG-mc-tEe"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="aVr-v2-PVz" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1003" y="4514"/>
-        </scene>
         <!--View Controller-->
         <scene sceneID="4yk-JH-F6a">
             <objects>
@@ -521,72 +477,6 @@ Ut strip steak drumstick labore. Ut labore ad sed cow pork belly sint kevin ex e
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zZZ-1B-3nu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1984" y="2690"/>
-        </scene>
-        <!--Segues-->
-        <scene sceneID="xNC-aS-hgd">
-            <objects>
-                <viewController id="Ec6-zJ-x6Q" customClass="SeguesViewController" customModule="CurlySample" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="3VJ-Nh-5F4"/>
-                        <viewControllerLayoutGuide type="bottom" id="wRj-nh-4r6"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Fcw-dG-uG9">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title of next view controller" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vNd-Xa-kzJ">
-                                <rect key="frame" x="160" y="94" width="280" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="280" id="zjp-WM-pa2"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qm0-wX-diR">
-                                <rect key="frame" x="249.5" y="144" width="101" height="30"/>
-                                <state key="normal" title="Perform segue">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="tappedPeformButton:" destination="Ec6-zJ-x6Q" eventType="touchUpInside" id="9f7-0f-j26"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="vNd-Xa-kzJ" firstAttribute="top" secondItem="3VJ-Nh-5F4" secondAttribute="bottom" constant="30" id="IHW-p6-3lG"/>
-                            <constraint firstAttribute="centerX" secondItem="vNd-Xa-kzJ" secondAttribute="centerX" id="T0L-Wc-qRc"/>
-                            <constraint firstAttribute="centerX" secondItem="Qm0-wX-diR" secondAttribute="centerX" id="tPg-JL-kpi"/>
-                            <constraint firstItem="Qm0-wX-diR" firstAttribute="top" secondItem="vNd-Xa-kzJ" secondAttribute="bottom" constant="20" id="vDd-yY-9lF"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Segues" id="XcJ-QB-Dse"/>
-                    <connections>
-                        <outlet property="titleField" destination="vNd-Xa-kzJ" id="YaR-OJ-4iI"/>
-                        <segue destination="JYW-xu-3DA" kind="show" identifier="segue" id="0qm-Wa-Cma"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="92a-Mr-M0M" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1012" y="-456"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="gBJ-Lh-AMd">
-            <objects>
-                <viewController id="JYW-xu-3DA" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="2nR-QC-q2Y"/>
-                        <viewControllerLayoutGuide type="bottom" id="lcI-6e-JnV"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="eSZ-Oj-6Cn">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JpA-dh-hjS" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1816" y="-456"/>
         </scene>
         <!--Alert Views-->
         <scene sceneID="OTO-fg-KGX">

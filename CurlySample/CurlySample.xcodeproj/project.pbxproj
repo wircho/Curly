@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9146C7941A1669C40062F567 /* LayoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9146C7931A1669C40062F567 /* LayoutViewController.swift */; };
 		915EE3041A1269210072384D /* NavDelegateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915EE3031A1269210072384D /* NavDelegateViewController.swift */; };
 		91638F461A0C385A0045F9BC /* ControlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91638F451A0C385A0045F9BC /* ControlViewController.swift */; };
 		91638F481A0D3C050045F9BC /* DeinitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91638F471A0D3C050045F9BC /* DeinitViewController.swift */; };
@@ -19,7 +18,6 @@
 		9171F0131A092AFF00F4015F /* CurlySampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9171F0121A092AFF00F4015F /* CurlySampleTests.swift */; };
 		9171F01D1A092B0E00F4015F /* Curly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9171F01C1A092B0E00F4015F /* Curly.swift */; };
 		9171F01F1A09321400F4015F /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9171F01E1A09321400F4015F /* AlertViewController.swift */; };
-		9171F0211A0939E100F4015F /* SeguesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9171F0201A0939E100F4015F /* SeguesViewController.swift */; };
 		9190DE631A0A843400D0F369 /* GestureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9190DE621A0A843400D0F369 /* GestureViewController.swift */; };
 		91A3BB411A127783009545AA /* ScrollDelegateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A3BB401A127783009545AA /* ScrollDelegateViewController.swift */; };
 /* End PBXBuildFile section */
@@ -35,7 +33,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9146C7931A1669C40062F567 /* LayoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutViewController.swift; sourceTree = "<group>"; };
 		915EE3031A1269210072384D /* NavDelegateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavDelegateViewController.swift; sourceTree = "<group>"; };
 		91638F451A0C385A0045F9BC /* ControlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlViewController.swift; sourceTree = "<group>"; };
 		91638F471A0D3C050045F9BC /* DeinitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeinitViewController.swift; sourceTree = "<group>"; };
@@ -51,7 +48,6 @@
 		9171F0121A092AFF00F4015F /* CurlySampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurlySampleTests.swift; sourceTree = "<group>"; };
 		9171F01C1A092B0E00F4015F /* Curly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Curly.swift; path = ../../Curly.swift; sourceTree = "<group>"; };
 		9171F01E1A09321400F4015F /* AlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
-		9171F0201A0939E100F4015F /* SeguesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeguesViewController.swift; sourceTree = "<group>"; };
 		9190DE621A0A843400D0F369 /* GestureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GestureViewController.swift; sourceTree = "<group>"; };
 		91A3BB401A127783009545AA /* ScrollDelegateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollDelegateViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -99,13 +95,11 @@
 				9171EFFC1A092AFE00F4015F /* AppDelegate.swift */,
 				9171EFFE1A092AFE00F4015F /* ViewController.swift */,
 				9171F01E1A09321400F4015F /* AlertViewController.swift */,
-				9171F0201A0939E100F4015F /* SeguesViewController.swift */,
 				9190DE621A0A843400D0F369 /* GestureViewController.swift */,
 				91638F451A0C385A0045F9BC /* ControlViewController.swift */,
 				91638F471A0D3C050045F9BC /* DeinitViewController.swift */,
 				915EE3031A1269210072384D /* NavDelegateViewController.swift */,
 				91A3BB401A127783009545AA /* ScrollDelegateViewController.swift */,
-				9146C7931A1669C40062F567 /* LayoutViewController.swift */,
 				9171F0001A092AFE00F4015F /* Main.storyboard */,
 				9171F0031A092AFE00F4015F /* Images.xcassets */,
 				9171F0051A092AFE00F4015F /* LaunchScreen.xib */,
@@ -247,10 +241,8 @@
 				9171F01D1A092B0E00F4015F /* Curly.swift in Sources */,
 				915EE3041A1269210072384D /* NavDelegateViewController.swift in Sources */,
 				9171F01F1A09321400F4015F /* AlertViewController.swift in Sources */,
-				9171F0211A0939E100F4015F /* SeguesViewController.swift in Sources */,
 				91A3BB411A127783009545AA /* ScrollDelegateViewController.swift in Sources */,
 				91638F461A0C385A0045F9BC /* ControlViewController.swift in Sources */,
-				9146C7941A1669C40062F567 /* LayoutViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

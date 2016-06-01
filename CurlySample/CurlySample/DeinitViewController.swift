@@ -15,7 +15,6 @@ class DeinitViewController: UIViewController {
     @IBOutlet weak var button: UIButton!
     
     @IBAction func tappedButton(sender: UIButton) {
-        
         sender.removeFromSuperview()
         
     }

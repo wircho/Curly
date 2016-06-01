@@ -63,7 +63,7 @@ class ScrollDelegateViewController: UIViewController {
             strings.insert((string,1), atIndex: 0)
         }
         
-        textView.text = "|      LOGS \n| (bottom to top)\n|\n| " + "\n|\n| ".join(strings.map{($1>1) ? "\($0) (\($1))" : $0})
+        textView.text = strings.map{($1>1) ? "\($0) (\($1))" : $0}.joinWithSeparator("|      LOGS \n| (bottom to top)\n|\n| " + "\n|\n| ")
         
     }
     
