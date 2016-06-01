@@ -12,7 +12,6 @@ Contents
 2. [Usage](#2-usage)
   * [Buttons, Sliders, etc (UIControl)](#buttons-sliders-etc-uicontrol)
   * [Alert Views](#alert-views)
-  * [Storyboard Segues](#storyboard-segues)
   * [Gesture Recognizers](#gesture-recognizers)
   * [Some Delegates](#some-delegates)
   * [Observing an Object's Deinit (Dealloc)](#observing-an-objects-deinit-dealloc)
@@ -20,11 +19,13 @@ Contents
 1. Installation
 ------------
 
-Just add Curly.swift to your project :)
+Just add Curly.swift to your project, or use [CocoaPods](https://cocoapods.org):
+
+```
+pod "Curly", :git => 'https://github.com/wircho/Curly.git', :branch => 'master'
+```
 
 This library is written in **Swift** but it also works in **Objective-C**. If you are using Objective-C, make sure you add `#import "[YourProjectName]-Swift.h"` at the beginning of your Objective-C file. You may need to compile once for the Swift methods to be recognized by Xcode's Objective-C editor.
-
-(Unfortunately you will not be able to install Curly as a pod, since CocoaPods's trunk command does not support this yet. The podspec file is there just waiting for this to become possible. If anyone wishes to help me submit it in a more manual way, please let me know. Thanks to [retsohuang](http://github.com/retsohuang/) for creating the origin podspec file).
 
 2. Usage
 -----
@@ -97,31 +98,6 @@ Other methods are: `.show(clicked:)`, `.show(willDismiss:)` and the more complet
 ```
 
 The other Objective-C methods are: `showWithclicked:`, `.showWithWillDismiss:` and the more complete version `showWithClicked:willPresent:didPresent:willDismiss:didDismiss:canceled:shouldEnableFirstOtherButton:`
-
-### Storyboard Segues: ###
-
-The method below works as long as you don't override `prepareForSegue` in your `UIViewController`'s subclass.
-
-##### Swift: #####
-
-```swift
-self.performSegueWithIdentifier("segue", sender: nil) {
-    (segue:UIStoryboardSegue, sender:AnyObject?) -> Void in
-            
-    println("preparing for segue!")
-            
-}
-```
-
-##### Objective-C: #####
-
-```objective-c
-[[UIViewController alloc] performSegueWithIdentifier:@"segue" sender:nil preparation:^(UIStoryboardSegue *segue, id sender) {
-                
-    NSLog(@"preparing for segue!");
-                
-}];
-```
 
 ### Gesture Recognizers: ###
 
