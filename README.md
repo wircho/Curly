@@ -11,7 +11,8 @@ Contents
 1. [Installation](#1-installation)
 2. [Usage](#2-usage)
   * [Buttons, Sliders, etc (UIControl)](#buttons-sliders-etc-uicontrol)
-  * [Alert Views](#alert-views)
+  * [~~Alert Views~~ (No longer supported. Use `UIAlertController`)](#alert-views)
+  * [Notifications](#notifications)
   * [Gesture Recognizers](#gesture-recognizers)
   * [Some Delegates](#some-delegates)
   * [Observing an Object's Deinit (Dealloc)](#observing-an-objects-deinit-dealloc)
@@ -40,7 +41,7 @@ You can preview the functionality below by running the sample project in the **C
 button.addAction(.TouchUpInside) {
     (bttn:UIButton) -> Void in
     
-    println("tapped button")
+    print("tapped button")
             
 }
 ```
@@ -49,7 +50,7 @@ button.addAction(.TouchUpInside) {
 slider.addAction(.ValueChanged) {
     (sldr:UISlider) -> Void in
     
-    println("moved slider")
+    print("moved slider")
             
 }
 ```
@@ -74,30 +75,27 @@ This works with any subclass of UIControl.
 }];
 ```
 
-### Alert Views: ###
+### ~~Alert Views:~~ ###
+
+This functionality is no longer supported by Curly. Please use [`UIAlertController`](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIAlertController_class/).
+
+### Notifications: ###
 
 ##### Swift: #####
 
 ```swift
-alertView.show(didDismiss:{(alertView:UIAlertView, buttonIndex:Int) -> Void in
-
-    println("dismissed with button at index \(buttonIndex)")
-            
-})
+"SOME-NOTIFICATION-NAME".observeFrom(self) {
+    innerSelf, note in
+    
+    print("Listening to NSNotification \(note) from \(innerSelf)")
+}
 ```
-Other methods are: `.show(clicked:)`, `.show(willDismiss:)` and the more complete version `.show(clicked:,willPresent:,didPresent:,willDismiss:,didDismiss:,canceled:,shouldEnableFirstOtherButton:)`
+
+The code above has the added advantage that the observation stops as soon as `self` is released/deinited. If you would like to have more control, the method above returns a `CurlyNotificationToken` which you may keep and cancel at any time using `token.cancel()`.
 
 ##### Objective-C: #####
 
-```objective-c
-[alertView showWithDidDismiss:^(UIAlertView *alertView, NSInteger buttonIndex) {
-
-    NSLog(@"dismissed with button at index %d",(int)buttonIndex);
-    
-}];
-```
-
-The other Objective-C methods are: `showWithclicked:`, `.showWithWillDismiss:` and the more complete version `showWithClicked:willPresent:didPresent:willDismiss:didDismiss:canceled:shouldEnableFirstOtherButton:`
+No special Objective-C support yet.
 
 ### Gesture Recognizers: ###
 
@@ -107,7 +105,7 @@ The other Objective-C methods are: `showWithclicked:`, `.showWithWillDismiss:` a
 let gestureRecognizer = UIPanGestureRecognizer {
     (gr:UIPanGestureRecognizer)->Void in
                 
-    println("gesture recognizer: \(gr)")
+    print("gesture recognizer: \(gr)")
     
 }
 ```
@@ -133,7 +131,7 @@ With Curly you can define delegates for UIScrollView and UINavigationController 
 ```swift
 scrollView.setDelegate(
     didScroll: { (scrollView:UIScrollView) -> Void in
-        println("did scroll")
+        print("did scroll")
     }
  )
 ```
@@ -143,10 +141,10 @@ For the complete `UIScrollViewDelegate` functionality use `.setDelegate(willBegi
 ```swift
 navigationController.setDelegate(
     willShow: { (viewController:UIViewController) -> Void in
-        println("will show")
+        print("will show")
     },
     didShow: { (viewController:UIViewController) -> Void in
-        println("did show")
+        print("did show")
     }
  )
 ```
@@ -179,7 +177,7 @@ The method below works with any subclass of NSObject. Unfortunately, as of now, 
 
 ```swift
 object.deinited {
-    println("object has been deinited")
+    print("object has been deinited")
 }
 ```
 
