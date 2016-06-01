@@ -12,7 +12,6 @@ Contents
 2. [Usage](#2-usage)
   * [Buttons, Sliders, etc (UIControl)](#buttons-sliders-etc-uicontrol)
   * [Alert Views](#alert-views)
-  * [Storyboard Segues](#storyboard-segues)
   * [Gesture Recognizers](#gesture-recognizers)
   * [Some Delegates](#some-delegates)
   * [Observing an Object's Deinit (Dealloc)](#observing-an-objects-deinit-dealloc)
@@ -97,31 +96,6 @@ Other methods are: `.show(clicked:)`, `.show(willDismiss:)` and the more complet
 ```
 
 The other Objective-C methods are: `showWithclicked:`, `.showWithWillDismiss:` and the more complete version `showWithClicked:willPresent:didPresent:willDismiss:didDismiss:canceled:shouldEnableFirstOtherButton:`
-
-### Storyboard Segues: ###
-
-The method below works as long as you don't override `prepareForSegue` in your `UIViewController`'s subclass.
-
-##### Swift: #####
-
-```swift
-self.performSegueWithIdentifier("segue", sender: nil) {
-    (segue:UIStoryboardSegue, sender:AnyObject?) -> Void in
-            
-    println("preparing for segue!")
-            
-}
-```
-
-##### Objective-C: #####
-
-```objective-c
-[[UIViewController alloc] performSegueWithIdentifier:@"segue" sender:nil preparation:^(UIStoryboardSegue *segue, id sender) {
-                
-    NSLog(@"preparing for segue!");
-                
-}];
-```
 
 ### Gesture Recognizers: ###
 
