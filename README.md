@@ -1,7 +1,7 @@
 Curly
 =====
 
-iOS library adding *closure* (*block* or *callback*) functionality to several native classes (alert views, buttons, sliders, storyboard segues, gesture recognizers, etc).
+iOS library adding *closure* (*block* or *callback*) functionality to several native classes (buttons, sliders, notifications, etc).
 
 This library is written in **Swift** but it also works in **Objective-C**. Make sure to read the installation notes below.
 
