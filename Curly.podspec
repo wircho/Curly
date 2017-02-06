@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/wircho/Curly"
   s.license      = { :type => "MIT" }
   s.author       = { "wircho" => "correo.de.adolfo@gmail.com" }
-  s.platform     = :ios, "8.0"
+  s.ios.deployment_target = "8.0"
   s.source       = { :git => "https://github.com/wircho/Curly.git", :tag => s.version }
   s.source_files  = "Curly.swift"
   s.requires_arc  = true
