@@ -14,10 +14,10 @@ class GestureViewController: UIViewController {
         super.viewDidLoad()
 
         
-        var fingerView = UIView(frame: CGRectMake(0,0,50,50))
-        fingerView.backgroundColor = UIColor.redColor()
+        let fingerView = UIView(frame: CGRect(x:0,y:0,width:50,height:50))
+        fingerView.backgroundColor = UIColor.red
         fingerView.layer.cornerRadius = fingerView.frame.size.width/CGFloat(2)
-        fingerView.hidden = true
+        fingerView.isHidden = true
         
         self.view.addSubview(fingerView)
         
@@ -26,15 +26,15 @@ class GestureViewController: UIViewController {
                 (panGR:UIPanGestureRecognizer)->Void in
                 
                 switch panGR.state {
-                case .Began:
-                    fingerView.hidden = false
+                case .began:
+                    fingerView.isHidden = false
                     fallthrough
-                case .Changed:
-                    fingerView.center = panGR.locationInView(panGR.view!)
-                case .Ended:
+                case .changed:
+                    fingerView.center = panGR.location(in: panGR.view!)
+                case .ended:
                     fallthrough
-                case .Failed:
-                    fingerView.hidden = true
+                case .failed:
+                    fingerView.isHidden = true
                 default:
                     break
                 }

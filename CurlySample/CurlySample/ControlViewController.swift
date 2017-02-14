@@ -22,7 +22,7 @@ class ControlViewController: UIViewController {
         
         weak var weakSelf = self
         
-        button.addAction(.TouchUpInside) {
+        button.addAction(.touchUpInside) {
             (bttn:UIButton) -> Void in
             
             if let s = weakSelf {
@@ -31,7 +31,7 @@ class ControlViewController: UIViewController {
             
         }
         
-        slider.addAction(.ValueChanged) {
+        slider.addAction(.valueChanged) {
             (sdr:UISlider) -> Void in
             
             if let s = weakSelf {

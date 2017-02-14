@@ -33,7 +33,7 @@ class ScrollDelegateViewController: UIViewController {
                 s.appendText("will end drag")
             },
             didEndDragging: { (scrollView:UIScrollView, willDecelerate:Bool) -> Void in
-                s.appendText("did end drag\n| (will"+(willDecelerate ? " " : " not ")+"decel.)")
+                s.appendText("did end drag\n(will"+(willDecelerate ? " " : " not ")+"decel.)")
             },
             willBeginDecelerating: { (scrollView:UIScrollView) -> Void in
                 s.appendText("will begin decel.")
@@ -56,14 +56,14 @@ class ScrollDelegateViewController: UIViewController {
         
     }
     
-    func appendText(string:String) {
+    func appendText(_ string:String) {
         if strings.first?.0 == string {
             strings[0].1 += 1
         } else {
-            strings.insert((string,1), atIndex: 0)
+            strings.insert((string,1), at: 0)
         }
         
-        textView.text = strings.map{($1>1) ? "\($0) (\($1))" : $0}.joinWithSeparator("|      LOGS \n| (bottom to top)\n|\n| " + "\n|\n| ")
+        textView.text = strings.map{($1>1) ? "\($0) (\($1))" : $0}.joined(separator: "\n\n")
         
     }
     

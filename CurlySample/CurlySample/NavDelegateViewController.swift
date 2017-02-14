@@ -9,9 +9,9 @@
 import UIKit
 
 class NavDelegateViewController: UIViewController {
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let navController = segue.destinationViewController as! UINavigationController
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let navController = segue.destination as! UINavigationController
         
         //Setting navigation controller delegate with closure
         
@@ -48,10 +48,10 @@ class NavDelegateViewController: UIViewController {
                     
                     //Adding left bar button item with closure
                     
-                    viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.Done) {
+                    viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.done) {
                         [weak navController] in
                         
-                        navController!.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
+                        navController!.presentingViewController!.dismiss(animated: true, completion: nil)
                     }
                     
                     fallthrough
@@ -60,10 +60,10 @@ class NavDelegateViewController: UIViewController {
                     
                     //Adding right bar button item with closure
                     
-                    viewController.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next", style: UIBarButtonItemStyle.Plain) {
+                    viewController.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next", style: UIBarButtonItemStyle.plain) {
                         [weak viewController] in
                         
-                        viewController!.performSegueWithIdentifier("next", sender:nil)
+                        viewController!.performSegue(withIdentifier: "next", sender:nil)
                     }
                 }
                 
@@ -71,13 +71,12 @@ class NavDelegateViewController: UIViewController {
         )
     }
     
-    @IBAction func tappedPresent(sender: AnyObject) {
-        
+    @IBAction func tappedPresent(_ sender: Any) {
         //Performing segue with closure
         
-        self.performSegueWithIdentifier("navigation", sender:nil)
-        
+        self.performSegue(withIdentifier: "navigation", sender:nil)
     }
+    
     
     
     
