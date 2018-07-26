@@ -149,7 +149,7 @@ public extension UIControl {
     }
     
     public func addAction<T:UIControl>(_ events:UIControlEvents,closure: @escaping (T)->Void) {
-        var delegateDictionary = objc_getAssociatedObject(self, &CurlyAssociatedDelegateDictionaryHandle) as! [UInt:[Curly.ControlDelegate]]!
+        var delegateDictionary = objc_getAssociatedObject(self, &CurlyAssociatedDelegateDictionaryHandle) as! [UInt:[Curly.ControlDelegate]]?
         if delegateDictionary == nil {
             delegateDictionary = [:]
         }
@@ -164,7 +164,7 @@ public extension UIControl {
     }
     
     public func removeActions(_ events:UIControlEvents) {
-        var delegateDictionary = objc_getAssociatedObject(self, &CurlyAssociatedDelegateDictionaryHandle) as! [UInt:[Curly.ControlDelegate]]!
+        var delegateDictionary = objc_getAssociatedObject(self, &CurlyAssociatedDelegateDictionaryHandle) as! [UInt:[Curly.ControlDelegate]]?
         guard delegateDictionary != nil else { return }
         if let array = delegateDictionary?[events.rawValue] {
             for delegate in array {
