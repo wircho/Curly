@@ -113,26 +113,26 @@ public extension UIGestureRecognizer {
 
 public extension UIBarButtonItem {
     
-    convenience init(barButtonSystemItem: UIBarButtonSystemItem, closure: @escaping ()->Void) {
+    convenience init(barButtonSystemItem: UIBarButtonItem.SystemItem, closure: @escaping ()->Void) {
         let delegate = Curly.BarButtonItemDelegate.init(tapped: closure)
         self.init(barButtonSystemItem: barButtonSystemItem, target:delegate, action:#selector(Curly.BarButtonItemDelegate.tappedButtonItem))
         objc_setAssociatedObject(self, &CurlyAssociatedDelegateHandle, delegate, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
     
-    convenience init(image: UIImage?, landscapeImagePhone: UIImage?, style: UIBarButtonItemStyle, closure: @escaping ()->Void) {
+    convenience init(image: UIImage?, landscapeImagePhone: UIImage?, style: UIBarButtonItem.Style, closure: @escaping ()->Void) {
         let delegate = Curly.BarButtonItemDelegate.init(tapped: closure)
         self.init(image: image, landscapeImagePhone: landscapeImagePhone, style: style, target:delegate, action:#selector(Curly.BarButtonItemDelegate.tappedButtonItem))
         objc_setAssociatedObject(self, &CurlyAssociatedDelegateHandle, delegate, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         
     }
     
-    convenience init(image: UIImage?, style: UIBarButtonItemStyle, closure: @escaping ()->Void) {
+    convenience init(image: UIImage?, style: UIBarButtonItem.Style, closure: @escaping ()->Void) {
         let delegate = Curly.BarButtonItemDelegate.init(tapped: closure)
         self.init(image: image, style: style, target:delegate, action:#selector(Curly.BarButtonItemDelegate.tappedButtonItem))
         objc_setAssociatedObject(self, &CurlyAssociatedDelegateHandle, delegate, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
     
-    convenience init(title: String?, style: UIBarButtonItemStyle, closure: @escaping ()->Void) {
+    convenience init(title: String?, style: UIBarButtonItem.Style, closure: @escaping ()->Void) {
         let delegate = Curly.BarButtonItemDelegate.init(tapped: closure)
         self.init(title: title, style: style, target:delegate, action:#selector(Curly.BarButtonItemDelegate.tappedButtonItem))
         objc_setAssociatedObject(self, &CurlyAssociatedDelegateHandle, delegate, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
@@ -143,12 +143,12 @@ public extension UIBarButtonItem {
 public extension UIControl {
     
     //Objective C support
-    public func addAction(_ events:UIControlEvents,block: @escaping (UIControl)->Void)
+    public func addAction(_ events:UIControl.Event,block: @escaping (UIControl)->Void)
     {
         self.addAction(events, closure: block)
     }
     
-    public func addAction<T:UIControl>(_ events:UIControlEvents,closure: @escaping (T)->Void) {
+    public func addAction<T:UIControl>(_ events:UIControl.Event,closure: @escaping (T)->Void) {
         var delegateDictionary = objc_getAssociatedObject(self, &CurlyAssociatedDelegateDictionaryHandle) as! [UInt:[Curly.ControlDelegate]]?
         if delegateDictionary == nil {
             delegateDictionary = [:]
@@ -163,7 +163,7 @@ public extension UIControl {
         
     }
     
-    public func removeActions(_ events:UIControlEvents) {
+    public func removeActions(_ events:UIControl.Event) {
         var delegateDictionary = objc_getAssociatedObject(self, &CurlyAssociatedDelegateDictionaryHandle) as! [UInt:[Curly.ControlDelegate]]?
         guard delegateDictionary != nil else { return }
         if let array = delegateDictionary?[events.rawValue] {
