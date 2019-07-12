@@ -143,12 +143,12 @@ public extension UIBarButtonItem {
 public extension UIControl {
     
     //Objective C support
-    public func addAction(_ events:UIControl.Event,block: @escaping (UIControl)->Void)
+    func addAction(_ events:UIControl.Event,block: @escaping (UIControl)->Void)
     {
         self.addAction(events, closure: block)
     }
     
-    public func addAction<T:UIControl>(_ events:UIControl.Event,closure: @escaping (T)->Void) {
+    func addAction<T:UIControl>(_ events:UIControl.Event,closure: @escaping (T)->Void) {
         var delegateDictionary = objc_getAssociatedObject(self, &CurlyAssociatedDelegateDictionaryHandle) as! [UInt:[Curly.ControlDelegate]]?
         if delegateDictionary == nil {
             delegateDictionary = [:]
@@ -163,7 +163,7 @@ public extension UIControl {
         
     }
     
-    public func removeActions(_ events:UIControl.Event) {
+    func removeActions(_ events:UIControl.Event) {
         var delegateDictionary = objc_getAssociatedObject(self, &CurlyAssociatedDelegateDictionaryHandle) as! [UInt:[Curly.ControlDelegate]]?
         guard delegateDictionary != nil else { return }
         if let array = delegateDictionary?[events.rawValue] {
@@ -179,13 +179,13 @@ public extension UIControl {
 
 public extension NSObject {
     
-    public func deinited(_ closure: @escaping ()->Void) {
+    func deinited(_ closure: @escaping ()->Void) {
         var deinitArray:[Curly.DeinitDelegate] = (objc_getAssociatedObject(self, &CurlyAssociatedDeinitDelegateArrayHandle) as? [Curly.DeinitDelegate]) ?? []
         deinitArray.append(Curly.DeinitDelegate.init(deinited: closure))
         objc_setAssociatedObject(self, &CurlyAssociatedDeinitDelegateArrayHandle, deinitArray, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
     
-    public func removeDeinitObservers() {
+    func removeDeinitObservers() {
         guard let deinitArray = objc_getAssociatedObject(self, &CurlyAssociatedDeinitDelegateArrayHandle) as? [Curly.DeinitDelegate] else { return }
         for delegate in deinitArray {
             delegate.deinited = nil
